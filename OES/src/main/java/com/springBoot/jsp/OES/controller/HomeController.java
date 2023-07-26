@@ -1,5 +1,6 @@
 package com.springBoot.jsp.OES.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.springBoot.jsp.OES.entity.User;
 import com.springBoot.jsp.OES.securityConfig.CustomUserDetails;
 import com.springBoot.jsp.OES.service.BannerServices;
 import com.springBoot.jsp.OES.service.ContactServices;
+import com.springBoot.jsp.OES.service.DailyBusinessServices;
 import com.springBoot.jsp.OES.service.OrderServices;
 import com.springBoot.jsp.OES.service.ProductService;
 import com.springBoot.jsp.OES.service.UserServices;
@@ -38,6 +40,9 @@ public class HomeController {
 	
 	@Autowired
 	private ContactServices contactServices;
+	
+	@Autowired
+	private DailyBusinessServices dailyBusinessServices;
 	
 	
 	@RequestMapping("/")
@@ -95,15 +100,6 @@ public class HomeController {
 		return "calender";
 	}
 
-	@GetMapping("/User/support")
-	public String getSupportPage(Model model, @AuthenticationPrincipal CustomUserDetails userDetail) {
-		User adminInfo = userServices.getUserById(userDetail.getId());
-		model.addAttribute("aminInfo", adminInfo);
-		return "support";
-	}
-
-	
-
 	
 	@GetMapping("/Admin/adminPannel")
 	public String getDashboard(Model model, @AuthenticationPrincipal CustomUserDetails userDetail) {
@@ -118,7 +114,14 @@ public class HomeController {
 				if(newUsers!=0) notificationCount+=1;
 				if(newOrders!=0) notificationCount+=1;
 				if(newQuery!=0) notificationCount+=1;
+		int[] statusPer= orderServices.getPercentageStatus();
+		float[] categoryWiseProductionPer= productService.getCategoryWiseProductionPer();
+		int[] dailyOnlineSell = dailyBusinessServices.getDailyOnlineSell();
+		int[] dailyCashOnDeliverySell = dailyBusinessServices.getDailyCashOnDeliverySell();
+		Date[] dates = dailyBusinessServices.getDates();
 		
+		
+		String totalProduction = productService.getTotalProduction();
 		model.addAttribute("totalUsers", totalUsers);
 		model.addAttribute("totalOrders", totalOrders);
 		model.addAttribute("totalSales", totalSales);
@@ -128,7 +131,12 @@ public class HomeController {
 		model.addAttribute("newOrders", newOrders);
 		model.addAttribute("newQuery", newQuery);
 		model.addAttribute("notificationCount", notificationCount);
-	
+		model.addAttribute("statusPer", statusPer);
+		model.addAttribute("catWiseProductionPer", categoryWiseProductionPer);
+		model.addAttribute("totalProduction", totalProduction);
+		model.addAttribute("dailyOnlineSell",dailyOnlineSell);
+		model.addAttribute("dailyCashOnDeliverySell",dailyCashOnDeliverySell);
+		model.addAttribute("dates",dates);
 		return "dashbord";
 	}
 

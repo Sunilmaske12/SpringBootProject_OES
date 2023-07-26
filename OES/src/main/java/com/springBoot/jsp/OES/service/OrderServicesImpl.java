@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.springBoot.jsp.OES.dao.DailyBusinessRepository;
 import com.springBoot.jsp.OES.dao.OrderDetailsRepository;
 import com.springBoot.jsp.OES.dao.OrderRepository;
 import com.springBoot.jsp.OES.entity.Order;
@@ -19,6 +20,7 @@ public class OrderServicesImpl implements OrderServices {
 	
 	@Autowired
 	private OrderDetailsRepository orderDetailsRepository;
+	
 	
 	@Override
 	public List<Order> getAllOrder() {
@@ -60,6 +62,27 @@ public class OrderServicesImpl implements OrderServices {
 		orderRepository.save(order);
 	
 		
+	}
+
+	@Override
+	public int[] getPercentageStatus() {
+		int[] statusPer=new int[4];
+		String[] allStatus= orderRepository.getAllStatus();
+			statusPer[0] = allStatus.length;
+		for(int i=0; i<allStatus.length; i++) {
+			if(allStatus[i].equals("Approved")) {
+				statusPer[1]+=1;
+			}
+			else if(allStatus[i].equals("Rejected")) {
+				statusPer[2]+=1;
+			}
+			else {
+				statusPer[3]+=1;
+			}
+
+		}
+		
+		return statusPer;
 	}
 
 }

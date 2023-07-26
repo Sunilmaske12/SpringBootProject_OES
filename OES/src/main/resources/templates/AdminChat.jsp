@@ -1,18 +1,14 @@
-<%@page import="com.codeo.shop.Dao.NotificationDao"%>
-<%@page import="com.codeo.shop.Dao.Contact_QueryDao"%>
-<%@page import="com.codeo.shop.entity.chat"%>
-<%@page import="java.util.List"%>
-<%@page import="java.sql.Date"%>
+
 
 <!DOCTYPE html>
-<html>
+<html  xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<title>Admin Chat</title>
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" >
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" >
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
@@ -54,45 +50,29 @@
 							</div>
 							
 						</div>
-						<div style="overflow-y:scroll;" class="card-body msg_card_body">
-						
-							
-						<%
-						
-						String ticketId=request.getParameter("ticketId");
-						NotificationDao.seenChatById(ticketId);
-						NotificationDao.seenQueryById(ticketId);
-						Contact_QueryDao cqd=new Contact_QueryDao();
-						List<chat> chatlist = cqd.getChatsById(ticketId);
-					for(chat c:chatlist){
-						if(c.getAdmin_Manager()==null){
-						
-					%>	
-						
-							<div class="d-flex justify-content-start mb-4">
+						<div   style="overflow-y:scroll;" class="card-body msg_card_body">
+						<div th:each="chats:${chats}">
+							<div th:if="${chats.UserName == Null}"  class="d-flex justify-content-start mb-4">
 								<div class="img_cont_msg">
 									<img src="img/hero/Chat_Icon.png" class="rounded-circle user_img_msg">
 								</div>
 								<div class="msg_cotainer">
-									<%=c.getMessage() %>
-									<span class="msg_time"><%=c.getChat_date() %></span>
+										<span  th:text="${chats.Chats}"></span>
+									<span class="msg_time" th:text="${chats.Time }+'||'+${chats.Date }"></span>
 								</div>
 							</div>
-						
-							<%}else{ %>
-							
-							<div class="d-flex justify-content-end mb-4">
+							<div th:unless="${chats.UserName == Null}"  class="d-flex justify-content-end mb-4">
 								<div class="msg_cotainer_send">
-									<%=c.getMessage() %>
-									<span  class="msg_time_send"> <%=c.getChat_date() %></span>
+									<span  th:text="${chats.Chats}"></span>
+									<span  class="msg_time_send" th:text="${chats.Time }+'||'+${chats.Date }"> </span>
 								</div>
 								<div class="img_cont_msg">
 								<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
 								</div>
 							</div>
-							
-							<%} }%></div>
-						<div class="card-footer">
+							</div>
+						</div>
+						<div class="card-footer" style="margin-bottom:0%">
 							<form action="chat">
 							<div class="input-group">
 								<div class="input-group-append">

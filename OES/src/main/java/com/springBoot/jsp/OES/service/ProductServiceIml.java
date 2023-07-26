@@ -1,6 +1,8 @@
 package com.springBoot.jsp.OES.service;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +55,28 @@ public class ProductServiceIml implements ProductService{
 	public void deleteCategoryById(int cid) {
 		theCategoryRepository.deleteById(cid);
 		
+	}
+
+	@Override
+	public float[] getCategoryWiseProductionPer() {
+		long[] allCatProduction=new long[4];
+			allCatProduction[0] =  theProductRepository.getProductionByCatId(12);
+			allCatProduction[1] =theProductRepository.getProductionByCatId(10);
+			allCatProduction[2] =theProductRepository.getProductionByCatId(15);
+			allCatProduction[3] =theProductRepository.getProduction();
+		float[] allCatPer=new float[4];
+		allCatPer[0] = (float) (((double)allCatProduction[0]/(double)allCatProduction[3])*100); //appliances
+		allCatPer[1] = (float) (((double)allCatProduction[1]/(double)allCatProduction[3])*100);//fan
+		allCatPer[2] = (float) (((double)allCatProduction[2]/(double)allCatProduction[3])*100);//tool
+		allCatPer[3] = 100 -allCatPer[0]-allCatPer[1]-allCatPer[2]; //other
+		return allCatPer;
+	}
+
+	@Override
+	public String getTotalProduction() {
+		
+		NumberFormat formatter = NumberFormat. getCurrencyInstance(new Locale("en", "IN")); 
+		return formatter.format(theProductRepository.getProduction());
 	}
 
 	

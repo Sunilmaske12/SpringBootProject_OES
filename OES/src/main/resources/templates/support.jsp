@@ -1,14 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
 
-<%@page import="com.codeo.shop.Dao.Contact_QueryDao"%>
-<%@page import="com.codeo.shop.entity.chat"%>
-<%@page import="java.util.List"%>
-<%@page import="java.sql.Date"%>
-<!--   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> -->
 
 <!DOCTYPE html>
-<html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,17 +16,18 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-touch-fullscreen" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
 
 
-<%@include file="component/AllCssFIles.jsp"%>
 </head>
 
 <body data-col="2-columns" class=" 2-columns ">
 
 	<div class="wrapper nav-collapsed menu-collapsed">
 
-		<%@include file="Asidebar.jsp"%>
-		<%@include file="Navbar.jsp"%>
+		 <aside th:replace="/UserHeaderFooter/Asidebar::Asidebar"></aside> 
+	<nav th:replace="/UserHeaderFooter/Navbar::Navbar"></nav>
+		
 
 		<div class="main-panel">
 			<div class="main-content">
@@ -44,11 +38,6 @@
 							aria-hidden="true"></i> ALL QUERIES </a>
 					</div>
 					
-
-<%
-Contact_QueryDao cqd=new Contact_QueryDao();
-List<chat> ticketlist = cqd.getAllTicketList();
-%>
 					<section id="shopping-cart">
 						<div class="row">
 							<div class="col-sm-12">
@@ -65,58 +54,44 @@ List<chat> ticketlist = cqd.getAllTicketList();
 														<th>STATUS</th>
 													</tr>
 												</thead>
-												<% int i=0;
-												for(chat ticket:ticketlist){
-					                       			Date date=ticket.getTicket_date();
-														i++; %>
-												<tr>
-													<td><%=i %> <%if(ticket.getSeen().equals("No")){ %><span style="color:red; font-size:80%;">new</span><%} %></td>
-													<td><%=date%></td>
+											
+												<tr  th:each="tickets,status:${tickets }">
+													<td  ><a th:text="${status.index+1 }"></a><span th:if="${tickets.seen=='No' }" style="color:red; font-size:80%;">new</span></td>
+													<td  th:text="${tickets.Date }"></td>
 						
-							                     <td><%=ticket.getTicketId()%></td>
-													<td><a href="AdminChat.jsp?ticketId=<%=ticket.getTicketId()%>" type="button" style="color:white; font-family:Serif; " class="btn btn-primary btn-sm">MESSAGE</a></td>
-												    <%if(ticket.getStatus().equals("Open")){%>
-												    <td><div  class="btn-group">
+							                     <td  th:text="${tickets.ticketId  }"></td>
+													<td><a th:href="@{'/Admin/allMyChats'+','+${tickets.ticketId }}" type="button" style="color:white; font-family:Serif; " class="btn btn-primary btn-sm">MESSAGE</a></td>
+												    <td th:if="${tickets.Status == 'Open' }">
+												    	<div  class="btn-group">
 															<a style="background: #00FF00;" type="button" class="btn btn-primary">OPEN</a>
 															<button style="background: #00FF00;" type="button"
 																class="btn btn-primary dropdown-toggle dropdown-toggle-split"
 																data-toggle="dropdown"></button>
 															<div class="dropdown-menu">
-																 <a	 class="dropdown-item"  href="Status_Servlet?Action=closeChat&T_Id=<%=ticket.getTicketId()%>">CLOSED</a>
+																 <a	 class="dropdown-item"  th:href="@{'/updateTicketStatus'+','+'Close'+','+${tickets.ticketId }}">CLOSED</a>
 															</div>
 														</div>
 													</td>
-													  
-												  <%  } else if(ticket.getStatus().equals("Close")){%>
-												   <td><div  class="btn-group">
+													   <td th:if="${tickets.Status == 'Close' }">
+												   <div  class="btn-group">
 															<a style="background: red; color:white; cursor:none;" type="button" class="btn btn-primary">CLOSED</a>
 															
 														</div>
 													</td>
-													   
-												  <%  }else{%>
-												   <td><div  class="btn-group">
+												   <td  th:If="${tickets.Status == 'Waiting' }">
+												   		<div  class="btn-group">
 															<button style="background: orange;" type="button" class="btn btn-primary">WAITING</button>
 															<button style="background: orange;" type="button"
 																class="btn btn-primary dropdown-toggle dropdown-toggle-split"
 																data-toggle="dropdown"></button>
 															<div class="dropdown-menu">
-																<a  class="dropdown-item" href="Status_Servlet?Action=openChat&T_Id=<%=ticket.getTicketId()%>">OPEN</a>
-																 <a	 class="dropdown-item"  href="Status_Servlet?Action=closeChat&T_Id=<%=ticket.getTicketId()%>">CLOSED</a>
+																<a  class="dropdown-item" th:href="@{'/updateTicketStatus'+','+'Open'+','+${tickets.ticketId }}">OPEN</a>
+																 <a	 class="dropdown-item" th:href="@{'/updateTicketStatus'+','+'Close'+','+${tickets.ticketId }}">CLOSED</a>
 															</div>
 														</div>
 													</td>
-													   
-												   <% } %>
-												    
-												    
-												    
-
+												
 												</tr>
-
-												<%
-												}
-												%>
 											</table>
 										</div>
 									</div>

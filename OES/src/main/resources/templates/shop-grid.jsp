@@ -8,9 +8,6 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Online Electrical Shopee</title>
 
-
-
-
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -33,12 +30,6 @@
 </head>
 
 <body>
-
-
-
-
-
-
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -114,14 +105,14 @@
 
 
 							<div class="featured__item__pic set-bg "
-								style="background-image: url(&quot;img/latest-product/<%=product.getProd_imageName()%>&quot;);">
+								th:style="'background-image: url(&quot;img/latest-product/'+${product.Prod_imageName}+'&quot;);'">
 								<a th:href="@{'/productDetails'+${product.Id }+','+${product.cid}}">
 									<img style="max-height: 200px; height: auto;" class="center"
 									th:src="'img/latest-product/'+${product.Prod_imageName}">
 								</a>
 								<ul class="featured__item__pic__hover">
 									<li><a
-										onclick="likeProducts(<%=product.getId()%>, '<%=product.getProd_name()%>', <%=product.getPriceAfterDiscount()%>, '<%=product.getProd_imageName()%>')"><i
+										th:onclick="likeProducts([[${product.Id }]]+','+[[${product.Prod_name }]]+','+[[${product.PriceAfterDiscount}]]+','+[[${product.Prod_imageName}]])"><i
 											class="fa fa-heart"></i></a></li>
 									<li><a><i class="fa fa-retweet"></i></a></li>
 								</ul>
@@ -149,7 +140,7 @@
 								<button class="primary-btn "
 									onMouseOver="this.style.backgroundColor='#808080'"
 									onMouseOut="this.style.backgroundColor='red'"
-									onclick="add_to_cart(<%=product.getId()%>, '<%=product.getProd_name()%>', <%=product.getPriceAfterDiscount()%>, '<%=product.getProd_imageName()%>')">
+									th:onclick="add_to_cart([[${product.Id }]]+','+[[${product.Prod_name }]]+','+[[${product.PriceAfterDiscount}]]+','+[[${product.Prod_imageName}]])">
 									<i class="fa fa-shopping-cart"></i>ADD TO CARD
 								</button>
 								<div>

@@ -13,4 +13,6 @@ public interface ContactServices {
 
 	int getNewQueryCount();
 
+	List<ChatTicket> getAllTickets();
+
 }

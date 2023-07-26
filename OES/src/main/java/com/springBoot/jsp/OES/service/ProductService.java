@@ -19,6 +19,11 @@ public interface ProductService {
 
 	public void deleteCategoryById(int cid);
 
+	public float[] getCategoryWiseProductionPer();
+
+	public String getTotalProduction();
+
+	
 	
 
 }

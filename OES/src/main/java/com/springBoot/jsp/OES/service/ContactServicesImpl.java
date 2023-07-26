@@ -34,4 +34,9 @@ public class ContactServicesImpl implements ContactServices {
 		return  ticketRepository.countBySeen("No") ;
 	}
 
+	@Override
+	public List<ChatTicket> getAllTickets() {
+		return ticketRepository.findAll();
+	}
+
 }

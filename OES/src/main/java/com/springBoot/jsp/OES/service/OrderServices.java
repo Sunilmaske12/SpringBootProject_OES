@@ -21,4 +21,6 @@ public interface OrderServices {
 
 	public void updateStatus(String action, int oid);
 
+	public int[] getPercentageStatus();
+
 }

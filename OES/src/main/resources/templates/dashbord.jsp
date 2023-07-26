@@ -271,29 +271,13 @@ for(int i=0; i<getDate.length; i++){
   })
 
   </script>
-  
-										
-										
-										
+  						
 								</div>
 							</div>
 						</div>
-					</div>
-
-<!-- 
-<%
-long totalProductPrice = d.getTotalProductPrice();
-String miNumIn = NumberFormat.getCurrencyInstance().format(totalProductPrice);
-long totalAppliancesPrice = d.getTotalAppliancesPrice();
-long totalFansPrice = d.getTotalFansPrice();
-long totalToolsPrice = d.getTotalToolsPrice();
-double appliancesPer =(double) ((double)totalAppliancesPrice/(double)totalProductPrice)*100;
-double fansPer =(double) ((double)totalFansPrice/(double)totalProductPrice)*100;
-double toolsPer =(double) ((double)totalToolsPrice/(double)totalProductPrice)*100;
-double otherPer =100-appliancesPer-fansPer-toolsPer;
-%>
-	
-	 -->					<div class="row match-height">
+					</div> 
+					
+					<div class="row match-height">
 						<div class="col-xl-4 col-lg-12">
 							<div class="card">
 								<div class="card-header">
@@ -301,7 +285,7 @@ double otherPer =100-appliancesPer-fansPer-toolsPer;
 								</div>
 								<div class="card-body">
 	
-									<p class="font-medium-2 text-muted text-center">Available <br>Rs. <%= totalProductPrice%></p>
+									<p class="font-medium-2 text-muted text-center">Available <br>Rs. <span th:text="${totalProduction }"></span></p>
 									
 									<canvas style="margin-top: 50px;"  id="myChartCate"></canvas>
 									
@@ -313,10 +297,10 @@ double otherPer =100-appliancesPer-fansPer-toolsPer;
 
 	<script type="text/javascript">
 		var ctx = document.getElementById("myChartCate").getContext("2d");
-		let a=<%=appliancesPer%>;
-		let b=<%=fansPer%>;
-		let c=<%=toolsPer%>;
-		let d=<%=otherPer%>;
+		let a= [[${catWiseProductionPer[0]}]];
+		let b= [[${catWiseProductionPer[1]}]];
+		let c= [[${catWiseProductionPer[2]}]];
+		let d= [[${catWiseProductionPer[3]}]];
 		var myChart = new Chart(ctx, {
 			type : "bar",
 			
@@ -469,16 +453,6 @@ double otherPer =100-appliancesPer-fansPer-toolsPer;
 						</div>
 						
 			<!--    TOP CATEGORY CHART STARTED         -->		
-	<!--  	
-<%
-int[] status = d.getStatus();//total-success-reject-wait
-int total=status[0];
-int success=status[1];
-int reject=status[2];
-int wait=status[3];
-%>
-
-	-->				
 						<div class="col-xl-4 col-lg-12">
 							<div class="card">
 								<div class="card-header">
@@ -494,10 +468,10 @@ int wait=status[3];
 										
 		<script type="text/javascript">
 		var ctx = document.getElementById("myChartStatus").getContext("2d");
-		let total=<%=total%>;
-		let success=<%=success%>;
-		let reject=<%=reject%>;
-		let wait=<%=wait%>;
+		let total=[[${statusPer[0]}]];
+		let success=[[${statusPer[1]}]];
+		let reject=[[${statusPer[2]}]];
+		let wait=[[${statusPer[3]}]];
 		var myChart = new Chart(ctx, {
 			type : "pie",
 			
@@ -681,7 +655,7 @@ int wait=status[3];
 					<span>Sidebar Bg Image</span>
 					<div class="float-right">
 						<div class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-							<input id="sidebar-bg-img" type="checkbox" checked=""
+							<input id="sidebar-bg-img" type="checkbox"
 								class="custom-control-input cz-bg-image-display"> <label
 								for="sidebar-bg-img" class="custom-control-label"></label>
 						</div>

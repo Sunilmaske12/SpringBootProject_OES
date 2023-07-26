@@ -15,6 +15,11 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	int getTotalSells();
 	
 	int countBySeen(String string);
+	
+	@Query("select Status from Order o")
+	String[] getAllStatus();
+
+	
 
 }
 
