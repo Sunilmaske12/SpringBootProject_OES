@@ -22,6 +22,8 @@
 <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
 <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
 <link rel="stylesheet" href="css/style.css" type="text/css">
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 </head>
 
 <body>
@@ -92,9 +94,9 @@
 						<p th:text="${product.Prod_description }">
 						<div class="product__details__quantity">
 						</div>
-						<a style="color:white; cursor:pointer" onclick="add_to_cart(<%=product.getId()%>, '<%=product.getProd_name()%>', <%=product.getPriceAfterDiscount()%>, '<%=product.getProd_imageName() %>')"
-						  class="primary-btn">ADD TO CARD</a>	  <a href="shoping-cart.jsp" style="height:50px; width:70px;" class="btn btn-warning btn-sm mt-1">  View CART </a>
-								 <a onclick="likeProducts(<%=product.getId()%>, '<%=product.getProd_name()%>', <%=product.getPriceAfterDiscount()%>, '<%=product.getProd_imageName() %>')"
+						<a style="color:white; cursor:pointer" th:onclick="add_to_cart([[${product.Id }]],[[${product.Prod_name }]],[[${product.PriceAfterDiscount}]],[[${product.Prod_imageName}]])"
+						  class="primary-btn">ADD TO CARD</a>	  <a th:href="@{/shoppingCart}" style="height:50px; width:70px;" class="btn btn-warning btn-sm mt-1">  View CART </a>
+								 <a th:onclick="likeProducts([[${product.Id }]],[[${product.Prod_name }]],[[${product.PriceAfterDiscount}]],[[${product.Prod_imageName}]])"
 							style="cursor:pointer" class="heart-icon"><span class="icon_heart_alt"></span></a>
 						<ul>
 							<li><b>Availability</b> <span>In Stock</span></li>
@@ -167,7 +169,7 @@
 								<img style="max-height: 200px; height:auto; " class="center" th:src="'img/latest-product/'+${relatedProduct.Prod_imageName}">>
 							    </a>
 							<ul class="featured__item__pic__hover">
-									<li><a onclick="likeProducts(<%=product.getId()%>, '<%=product.getProd_name()%>', <%=product.getPriceAfterDiscount()%>, '<%=product.getProd_imageName() %>')" ><i class="fa fa-heart"></i></a></li>
+									<li><a th:onclick="likeProducts([[${product.Id }]],[[${product.Prod_name }]],[[${product.PriceAfterDiscount}]],[[${product.Prod_imageName}]])" ><i class="fa fa-heart"></i></a></li>
 									<li><a><i class="fa fa-retweet"></i></a></li>
 								</ul>
 						</div>
@@ -193,9 +195,9 @@
 							
 							<a  class="primary-btn" style="background-color: red; color:white;"  onMouseOver="this.style.backgroundColor='#808080'"
 								onMouseOut="this.style.backgroundColor='red'"
-									onclick="add_to_cart(<%=product.getId()%>, '<%=product.getProd_name()%>', <%=product.getPriceAfterDiscount()%>, '<%=product.getProd_imageName() %>')">
+									th:onclick="add_to_cart([[${product.Id }]],[[${product.Prod_name }]],[[${product.PriceAfterDiscount}]],[[${product.Prod_imageName}]])">
 								 <i  class="fa fa-shopping-cart"></i>ADD TO CARD </a>
-								 	 <div > <a href="shoping-cart.jsp" class="btn btn-warning btn-sm mt-1">  View CART </a></div>
+								 	 <div > <a th:href="@{/shoppingCart}" class="btn btn-warning btn-sm mt-1">  View CART </a></div>
 								
 						</div>
 					</div>
@@ -221,6 +223,7 @@
 	<script src="js/mixitup.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/main.js"></script>
+    <script type="text/javascript" src="js/CommonScript.js"></script>
 
 
 </body>

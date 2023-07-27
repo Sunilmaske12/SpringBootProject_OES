@@ -7,8 +7,6 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Online Electrical Shopee</title>
 
-
-
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -38,11 +36,6 @@
 </head>
 
 <body>
-
-
-
-		
-
 
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -100,10 +93,10 @@
 											
 							<div class="hero__search__phone__text" th:object="${user}">
 								<h5>WELCOME</h5>
-								<h4 class=" font-weight-bold" style="color: green;" >
-									<a th:if="${user!=null }"  th:text="${user.name}"></a>
-									<a th:unless="${user!=null }" >User</a>									
-								</h4>
+								<div class=" font-weight-bold" style="color: green;" >
+									<h4 th:if="${user!=null }"  th:text="${user.name}"></h4>
+									<h5 th:unless="${user!=null }" >You are not login</h5>									
+								</div>
 
 							</div>
 						</div>
@@ -164,8 +157,7 @@
 
 
 				</div>
-
-</div>
+			</div>
 		</div>
 
 	</section>

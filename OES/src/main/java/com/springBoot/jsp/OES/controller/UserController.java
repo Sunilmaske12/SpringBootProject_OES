@@ -42,6 +42,16 @@ public class UserController {
 	  return  "redirect:/registrationForm";
 	  }
 	  
+	  @GetMapping("/customLogin")
+	  public String getCustomLoginForm() {
+		  return "loginform";
+	  }
+	  
+	  @PostMapping("/loginUser")
+	  public String loginUser() {
+		  return null;
+	  }
+	  
 	@GetMapping("/Admin/userList")
 	public String getAllUserPage(Model model, @AuthenticationPrincipal CustomUserDetails userDetail) {
 		User adminInfo = userServices.getUserById(userDetail.getId());

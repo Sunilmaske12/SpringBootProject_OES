@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="zxx"  xmlns:th="http://www.thymeleaf.org">
+<html  xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="UTF-8">
@@ -11,9 +11,7 @@
 <title>Shoping cart</title>
 
 <!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"	rel="stylesheet">
 
 <!-- Css Styles -->
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -27,18 +25,10 @@
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 
-
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-
-
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
 </head>
-
-
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -66,8 +56,6 @@
 
 	<!-- Shoping Cart Section Begin -->
 	<section class="shoping-cart spad">
-
-		
 
 		<div class="container">
 			<div class="row">

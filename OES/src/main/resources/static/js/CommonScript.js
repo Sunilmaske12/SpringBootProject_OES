@@ -269,7 +269,7 @@ function showToast(content){
 function likeProducts(pid, pname, pprice, pimagename)
 {
 	let like=localStorage.getItem("like");
-	
+	console.log("pid "+pid)
 	//no products in like
 	if(like==null){
 			let LikeProduct =[];
@@ -375,7 +375,6 @@ function updateLike(){
 	$(document).ready(function(){
 		updateLike()
 	})
-
 
 
 //========================Like Products end===============

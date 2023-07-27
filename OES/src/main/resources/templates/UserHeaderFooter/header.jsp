@@ -1,9 +1,3 @@
-<!-- 
-<%
-HttpSession session2 = request.getSession();
-String user_name1 = (String) session2.getAttribute("UserName");
-String user_email1 = (String) session2.getAttribute("UserEmail");
-%> -->
 <!DOCTYPE html >
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -34,34 +28,19 @@ String user_email1 = (String) session2.getAttribute("UserEmail");
 									class="fa fa-linkedin"></i></a> <a href="#"><i
 									class="fa fa-instagram"></i></a>
 							</div>
-
-						<!-- 	<%
-							if (user_name1 == null) {
-							%> -->
-							<div class="header__top__right_register">
+			<div class="header__top__right_register">
 								<a th:href="@{/loginForm}"><i class="fa fa-user"></i> Login</a>
 								 <a th:href="@{/registrationForm}"><i class="fa fa-user"></i>
 									Register</a>
 							</div>
-							<!-- <%
-							} else {
-							%>
- -->
 							<a onclick="logoutWarning()" th:href="@{/logout}"><i class="fa fa-user"></i> LogOut</a>
-
-						<!-- 	<%
-							}
-							%> -->
-
-
-
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="container">
+		<div style="width:100%; margin-left:8%;margin-right:2%;" class="container">
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="header__logo">
@@ -78,37 +57,26 @@ String user_email1 = (String) session2.getAttribute("UserEmail");
 							<li><a th:href="@{/blog}">Blog</a></li>
 							<li><a th:href="@{/User/contact}">Contact</a></li>
 							<li><a th:href="@{/User/MyOrders}">My Order</a></li>
-							
-								
 						</ul>
 					</nav>
-					
-					
 				</div>
 				
 				<div class="col-lg-3">
 					<div class="header__cart">
 						<ul>
 							<li><a th:href="@{/likeProduct}"><i class=" fa fa-heart"></i> <span class="likeproduct">0</span></a></li>
-
-							<!-- here i get dynamic cart number when i add class="badge badge-danger" -->
+						<!-- here i get dynamic cart number when i add class="badge badge-danger" -->
 							<li><a th:href="@{/shoppingCart}"> <i
 									class="fa fa-cart-plus " style="font-size:33px;"></i> <span
 									 class="cartItem" >0</span></a></li>
-
-							
-
-						</ul>
+					</ul>
 						<div class="header__cart__price">
-							item: <span class="totalOrder"></span>
+							item: <h4 class="totalOrder"></h4>
 						</div>
 					</div>
 				</div>
 					</div>
-			<div class="humberger__open">
-				<i class="fa fa-bars"></i>
 			</div>
-		</div>
 	</header>
 	<!-- Header Section End -->
 

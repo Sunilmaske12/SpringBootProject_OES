@@ -44,7 +44,6 @@ public class HomeController {
 	@Autowired
 	private DailyBusinessServices dailyBusinessServices;
 	
-	
 	@RequestMapping("/")
 		public String indexPage(Model model, @AuthenticationPrincipal CustomUserDetails userDetail) {
 		List<Category> allCategories = productService.getAllCategories();

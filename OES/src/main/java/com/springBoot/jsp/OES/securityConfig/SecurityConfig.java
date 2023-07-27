@@ -1,5 +1,6 @@
 package com.springBoot.jsp.OES.securityConfig;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.springBoot.jsp.OES.service.UserDetailServiceImpl;
 
@@ -18,7 +20,10 @@ import com.springBoot.jsp.OES.service.UserDetailServiceImpl;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-
+	
+	@Autowired
+	private AuthenticationSuccessHandler successHandler;
+	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() { 
 		
@@ -36,7 +41,8 @@ public class SecurityConfig {
 		requestMatchers("/User/**").hasRole("USER").
 		requestMatchers("/Admin/**").hasRole("ADMIN").
 		requestMatchers("/**").permitAll().
-		anyRequest().authenticated().and().formLogin();
+		anyRequest().authenticated().and().formLogin().loginPage("/customLogin").
+		successHandler(successHandler);
 		httpSecurity.authenticationProvider(authenticationProvider());
 		return httpSecurity.build();
 

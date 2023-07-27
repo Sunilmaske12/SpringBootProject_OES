@@ -112,7 +112,7 @@
 								</a>
 								<ul class="featured__item__pic__hover">
 									<li><a
-										th:onclick="likeProducts([[${product.Id }]]+','+[[${product.Prod_name }]]+','+[[${product.PriceAfterDiscount}]]+','+[[${product.Prod_imageName}]])"><i
+										th:onclick="likeProducts([[${product.Id }]],[[${product.Prod_name }]],[[${product.PriceAfterDiscount}]],[[${product.Prod_imageName}]])"><i
 											class="fa fa-heart"></i></a></li>
 									<li><a><i class="fa fa-retweet"></i></a></li>
 								</ul>
@@ -140,11 +140,11 @@
 								<button class="primary-btn "
 									onMouseOver="this.style.backgroundColor='#808080'"
 									onMouseOut="this.style.backgroundColor='red'"
-									th:onclick="add_to_cart([[${product.Id }]]+','+[[${product.Prod_name }]]+','+[[${product.PriceAfterDiscount}]]+','+[[${product.Prod_imageName}]])">
+									th:onclick="add_to_cart([[${product.Id }]],[[${product.Prod_name }]],[[${product.PriceAfterDiscount}]],[[${product.Prod_imageName}]])">
 									<i class="fa fa-shopping-cart"></i>ADD TO CARD
 								</button>
 								<div>
-									<a th:href="@{/shopingCart}" class="btn btn-warning btn-sm mt-1">
+									<a th:href="@{/shoppingCart}" class="btn btn-warning btn-sm mt-1">
 										View CART </a>
 								</div>
 
