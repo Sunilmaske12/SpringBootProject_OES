@@ -48,8 +48,8 @@
 							</div>
 							
 						</div>
-						<div th:each="chats:${chats}" class="card-body msg_card_body" >
-						
+						<div class="card-body msg_card_body">
+							<div  th:each="chats:${chats}" >
 						
 							<div th:if="${chats.UserName == Null}"  class="d-flex justify-content-start mb-4">
 								<div class="img_cont_msg">
@@ -62,7 +62,7 @@
 							</div>
 						
 							
-							<div th:if="${chats.UserName != Null}" class="d-flex justify-content-end mb-4">
+							<div th:unless="${chats.UserName == Null}" class="d-flex justify-content-end mb-4">
 								<div class="msg_cotainer">
 									<a th:text="${chats.Chats}"></a>
 									<span class="msg_time" th:text="${chats.Time }+'||'+${chats.Date }"></span>
@@ -72,37 +72,24 @@
 									
 								</div>
 							</div>
-							
-							
-						</div>
-						<div class="card-footer">
-							
-							<form action="chat">
-							<div class="input-group">
-							<div th:if="${status == 'Close' }" style="text-align:center; margin-left:30%;"><h4>Ticket is closed</h4></div>
-							
-						
-								<div th:unless="${status == 'Close' }" class="input-group-append">
-									<span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
-								</div>
-								<textarea name="message" class="form-control type_msg" placeholder="Type your message..."></textarea>
-								<div class="input-group-append">
-									<button type="submit" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
-								</div>
-								<input type="hidden" name="Action" value="chatByUser">
-								<input type="hidden" name="ticketId" value="<%=ticketId%>"><%}}else{ %>
-								
-								<div class="input-group-append">
-									<span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
-								</div>
-								<textarea name="message" class="form-control type_msg" placeholder="Type your message..."></textarea>
-								<div class="input-group-append">
-									<button type="submit" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
-								</div>
-								<input type="hidden" name="Action" value="chatByUser">
-								<input type="hidden" name="ticketId" value="<%=ticketId%>">
 							</div>
-							</form>
+						</div>
+						
+						<div class="card-footer" >
+							<form th:action="@{/User/sendChat}"  method="Post">
+							<div class="input-group">
+								<div th:if="${status == 'Close' }" style="text-align:center; margin-left:30%;"><h4>Ticket is closed</h4></div>
+							</div>
+							<div th:unless="${status == 'Close' }" class="input-group">
+								<div class="input-group-append">
+									<span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+								</div>
+								<textarea name="message"  class="form-control type_msg" placeholder="Type your message..."></textarea>
+								<div class="input-group-append">
+									<button type="submit" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
+								</div>
+								<input type="hidden" name="Ticket_Id" th:value="${ticketId }">
+							</div></form>
 						</div>
 					</div>
 				</div>

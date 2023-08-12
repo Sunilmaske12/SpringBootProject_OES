@@ -52,7 +52,7 @@
 						</div>
 						<div   style="overflow-y:scroll;" class="card-body msg_card_body">
 						<div th:each="chats:${chats}">
-							<div th:if="${chats.UserName == Null}"  class="d-flex justify-content-start mb-4">
+							<div th:if="${chats.UserName != Null}"  class="d-flex justify-content-start mb-4">
 								<div class="img_cont_msg">
 									<img src="img/hero/Chat_Icon.png" class="rounded-circle user_img_msg">
 								</div>
@@ -61,7 +61,7 @@
 									<span class="msg_time" th:text="${chats.Time }+'||'+${chats.Date }"></span>
 								</div>
 							</div>
-							<div th:unless="${chats.UserName == Null}"  class="d-flex justify-content-end mb-4">
+							<div th:unless="${chats.UserName != Null}"  class="d-flex justify-content-end mb-4">
 								<div class="msg_cotainer_send">
 									<span  th:text="${chats.Chats}"></span>
 									<span  class="msg_time_send" th:text="${chats.Time }+'||'+${chats.Date }"> </span>
@@ -73,7 +73,7 @@
 							</div>
 						</div>
 						<div class="card-footer" style="margin-bottom:0%">
-							<form action="chat">
+							<form th:action="@{/Admin/sendChat}" method="post">
 							<div class="input-group">
 								<div class="input-group-append">
 									<span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
@@ -82,8 +82,7 @@
 								<div class="input-group-append">
 									<button type="submit" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
 								</div>
-								<input type="hidden" name="Action" value="chatByAdmin">
-								<input type="hidden" name="ticketId" value="<%=ticketId%>">
+								<input type="hidden" name="Ticket_Id" th:value="${ticketId }">
 							</div></form>
 						</div>
 					</div>

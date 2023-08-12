@@ -6,12 +6,18 @@ function choosePayment(payment){
 		
 	}else if(payment=="cash"){
 			$(".paymentOrder").html(`<button type="submit"  class="site-btn" style="border-radius:10px;">PLACE ORDER</button>`);
-		
 	}
 	
 }
 
-function onlinePayment(){
+function onlinePayment(payment){
+	if(payment=="online"){
+			$(".paymentOrder").html(`<button type="button" onclick="onlinePayment()" class="site-btn" style="border-radius:10px;">MAKE PAYMENT</button>`);
+		
+	}else if(payment=="cash"){
+			$(".paymentOrder").html(`<button type="submit"  class="site-btn" style="border-radius:10px;">PLACE ORDER</button>`);
+	}
+	
 	console.log("working started");
 	let orderId=$("#orderId").val();
 	let amount1=$("#totalPricePay").val();

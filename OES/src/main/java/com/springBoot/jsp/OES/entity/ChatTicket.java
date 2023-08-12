@@ -1,7 +1,6 @@
 package com.springBoot.jsp.OES.entity;
 
 import java.sql.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,11 +16,17 @@ public class ChatTicket {
 	private int ticketId;
 	private int User_Id;
 	private String User_Name;
-	private Date Date;
+	@Column(insertable = false)
+	private Date Date ;
+	@Column(insertable = false)
 	private String Time;
+	@Column(insertable = false)
 	private String Status;
 	private String Admin_Manager;
+	@Column(insertable = false)
 	private String seen;
+	
+	
 	public int getTicketId() {
 		return ticketId;
 	}

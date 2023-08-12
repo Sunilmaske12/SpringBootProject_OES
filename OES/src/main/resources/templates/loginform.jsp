@@ -9,6 +9,10 @@
 <!-- Main css -->
 <link rel="stylesheet" href="AdminPanel/css/style.css">
 <meta charset="UTF-8">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 <link rel="apple-touch-icon" type="image/png"
 	href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
 
@@ -47,10 +51,10 @@
 						<a th:href="@{/registrationForm}" class="signup-image-link"> <b>Create an account</b></a>
 					</div>
 					<div>
-						<div class="signin-form">
-							<h2 class="form-title">Online Eletrical Shopee</h2>
+						<div >
+							<h2 style="margin-bottom:30px">ONLINE ELECTRICAL SHOPEE</h2>
 							<form method="post" th:action="@{/customLogin}" class="register-form"
-								id="login-form">
+								id="login-form"  style="margin-left:10px">
 								
 								<div th:if="${param.error}" class="alert alert-danger">
 									Invalid Username and Password!
@@ -77,18 +81,19 @@
 								<div class="form-group form-button">
 									<input type="submit" name="signin" id="signin"
 										class="form-submit" value="Log in"
-										style="font-size: 20px; padding: 14px 25px;" />
+										style="font-size: 20px; padding: 12px 25px;" />
 								</div>
 							</form>
+							<br>
 							<div>
-								<h3>
+								<h5>
 									<span>Or login with</span>
-								</h3>
+								</h5><br>
 								<ul class="socials">
 									<li><a href="#" class="social-login-icon fab fa-instagram"></a></li>
 									<li><a href="#" class="social-login-icon fab fa-facebook"></a></li>
 									<li><a href="#" class="social-login-icon fab fa-twitter"></a></li>
-								</ul>
+								</ul><hr>
 							</div>
 						</div>
 					</div>

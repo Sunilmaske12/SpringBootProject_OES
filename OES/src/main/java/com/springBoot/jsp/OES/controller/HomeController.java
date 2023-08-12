@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.springBoot.jsp.OES.entity.Banner;
 import com.springBoot.jsp.OES.entity.Category;
+import com.springBoot.jsp.OES.entity.Product;
 import com.springBoot.jsp.OES.entity.User;
 import com.springBoot.jsp.OES.securityConfig.CustomUserDetails;
 import com.springBoot.jsp.OES.service.BannerServices;
@@ -46,11 +47,13 @@ public class HomeController {
 	
 	@RequestMapping("/")
 		public String indexPage(Model model, @AuthenticationPrincipal CustomUserDetails userDetail) {
+		List<Product> recentProducts = productService.getRecentProducts();
 		List<Category> allCategories = productService.getAllCategories();
 		List<Banner> allBanner = bannerService.getAllBanner();
 		model.addAttribute("allCategories", allCategories);
 		model.addAttribute("allBanner", allBanner);
 		model.addAttribute("user", userDetail); 
+		model.addAttribute("recentProducts", recentProducts);
 		return "index";
 	}
 
@@ -60,13 +63,6 @@ public class HomeController {
 		return "loginform";
 	}
 	
-	
-
-	
-
-	
-	
-
 	@GetMapping("/Admin/viewCategory")
 	public String getviewCategorypage(Model model, @AuthenticationPrincipal CustomUserDetails userDetail) {
 		User adminInfo = userServices.getUserById(userDetail.getId());

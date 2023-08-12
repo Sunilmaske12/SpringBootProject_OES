@@ -15,4 +15,8 @@ public interface ContactServices {
 
 	List<ChatTicket> getAllTickets();
 
+	int saveTicket(ChatTicket ct);
+
+	void saveChats(Chat chat);
+
 }

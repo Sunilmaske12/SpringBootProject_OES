@@ -14,7 +14,9 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int order_Id;
+	@Column(insertable = false)
 	Date Date;
+	@Column(insertable = false)
 	String time;
 	@Column(name="C_Address_Id")
 	String address_Id;
@@ -26,7 +28,9 @@ public class Order {
 	private int Total_Amount;
 	String Payment_Mode;
 	String Status;
+	@Column(insertable = false)
 	String seen;
+	@Column(insertable = false)
 	String Razorpay_Order_Id;
 	
 	public Order() {

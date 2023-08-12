@@ -23,4 +23,8 @@ public interface OrderServices {
 
 	public int[] getPercentageStatus();
 
+	public Order saveOrder(String razopayOrderId,String addressId, int uid, int totalPrice, String paymentMode);
+
+	public void saveOrderDetails(OrderDetails orderdetail);
+
 }

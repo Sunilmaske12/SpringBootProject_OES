@@ -1,6 +1,7 @@
 package com.springBoot.jsp.OES.service;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -77,6 +78,16 @@ public class ProductServiceIml implements ProductService{
 		
 		NumberFormat formatter = NumberFormat. getCurrencyInstance(new Locale("en", "IN")); 
 		return formatter.format(theProductRepository.getProduction());
+	}
+
+	@Override
+	public List<Product> getRecentProducts() {
+		List<Product> p1= theProductRepository.findAll();
+		List<Product> p2=new ArrayList<Product>();
+		for(int i=p1.size()-4; i<p1.size(); i++) {
+			p2.add(p1.get(i));
+		}
+		return p2;
 	}
 
 	

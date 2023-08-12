@@ -71,8 +71,7 @@
 					<div class="shoping__cart__btns">
 						<a th:href="@{/allProduct}" class="primary-btn cart-btn">CONTINUE SHOPPING</a> <button onclick="clearCart()"
 							 class="primary-btn cart-btn cart-btn-right"> <span
-							class="icon_loading"></span> Clear Cart
-						</button>
+							class="icon_loading"></span> Clear Cart	</button>
 					</div>
 				</div>
 
@@ -99,8 +98,9 @@
 							<li>DELIVERY CHARGE <span class="charges"></span></li>
 							<li><h3 >Total Price: <span class="totalPrice"></span></h3></li>
 							
-						</ul><form th:action="@{/cartlength}"><input type="hidden" id="cartlegth" name="cartlegth">
-						<input type="hidden" name="TotalAmount" id="totalPricePay"> 
+						</ul><form th:action="@{/User/processToCheckout}">
+							<input type="hidden" id="cartlegth" name="cartlegth">
+							<input type="hidden" name="TotalAmount" id="totalPricePay"> 
 						<button style="width:100%;" type="submit"  class="primary-btn">PROCEED TO
 							CHECKOUT</button></form>
 					</div>

@@ -2,6 +2,7 @@ package com.springBoot.jsp.OES.entity;
 
 import java.sql.Date;
 import java.sql.Time;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,12 +14,15 @@ public class Chat{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Chat_Id;
 	private String ticketid;
-	private String UserName; 
+	private String UserName;
+	@Column(insertable = false)
 	private Date Date;
+	@Column(insertable = false)
 	private Time Time;
 	private String Chats;
 	private String Admin_Manager;
 	private String Sender;
+	@Column(insertable = false)
 	private String Seen;
 	
 	

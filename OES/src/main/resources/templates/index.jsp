@@ -277,60 +277,60 @@
 
 
 			<div class="row featured__filter">
-				<%-- <%
-				// List<Product> list = productdao.getAllProducts();
-				int c=0;
-				for (Product product : prodlist) {
-					 c=c+1; if(c>(prodlist.size()-4)){
-					
-				%>
-			 --%>	<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat ">
+			<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat " th:each="product:${recentProducts }">
 					<div style="border: 1px solid grey;" class="mt-5">
 						<div class="featured__item m-4 ">
 						
 						
 						
-						<%-- 	<div class="featured__item__pic set-bg "
-								style="background-image: url(&quot;img/latest-product/<%=product.getProd_imageName()%>&quot;);">
-								<a href="Product-details.jsp?product=<%=product.getId()%>">
+					 	<div class="featured__item__pic set-bg "
+								th:style="'background-image: url(&quot;img/latest-product/'+${product.Prod_imageName}+'&quot;);'">
+								<a th:href="@{'/productDetails'+${product.Id }+','+${product.cid}}">
 									<img style="max-height: 200px; height: auto;" class="center"
-									src="img/latest-product/<%=product.getProd_imageName()%>">
+									th:src="'img/latest-product/'+${product.Prod_imageName}">
 								</a>
 								<ul class="featured__item__pic__hover">
-									<li><a onclick="likeProducts(<%=product.getId()%>, '<%=product.getProd_name()%>', <%=product.getPriceAfterDiscount()%>, '<%=product.getProd_imageName() %>')" ><i class="fa fa-heart"></i></a></li>
+									<li><a
+										th:onclick="likeProducts([[${product.Id }]],[[${product.Prod_name }]],[[${product.PriceAfterDiscount}]],[[${product.Prod_imageName}]])"><i
+											class="fa fa-heart"></i></a></li>
 									<li><a><i class="fa fa-retweet"></i></a></li>
 								</ul>
+								
 							</div>
 
 							<div class="featured__item__text">
 								<h6>
-									<a href="Product-details.jsp?product=<%=product.getId()%>"
-										style="color: black"><%=product.getProd_name()%></a>
+									<a th:href="@{'/productDetails'+${product.Id }+','+${product.cid}}"
+										style="color: black"
+										th:text="${product.Prod_name }"
+										></a>
 								</h6>
-								
+
 								<button type="button" class="btn btn-light">
-									<h5>
-										Rs.<%=product.getPriceAfterDiscount()%>/- <span
-											style="font-size: 15px; font-style: italic; text-decoration: line-through; color: red">
-											<%=product.getProd_price()%> ,<%=product.getProd_discount()%>
+									<h5 th:text="'Rs. '+${product.PriceAfterDiscount+'/-' }">
+									<span
+											style="font-size: 15px; font-style: italic; text-decoration: line-through; color: red"
+											th:text="${product.Prod_price }+' , '+ ${product.Prod_discount }"
+											>
 											%off
 										</span>
 									</h5>
 								</button>
-								
-                                       <button  class="primary-btn "
-											onMouseOver="this.style.backgroundColor='#808080'"
-											onMouseOut="this.style.backgroundColor='red'" 
-											onclick="add_to_cart(<%=product.getId()%>, '<%=product.getProd_name()%>', <%=product.getPriceAfterDiscount()%>, '<%=product.getProd_imageName() %>')">
-											 <i	class="fa fa-shopping-cart"></i>ADD TO CARD</button>
+
+								<button class="primary-btn "
+									onMouseOver="this.style.backgroundColor='#808080'"
+									onMouseOut="this.style.backgroundColor='red'"
+									th:onclick="add_to_cart([[${product.Id }]],[[${product.Prod_name }]],[[${product.PriceAfterDiscount}]],[[${product.Prod_imageName}]])">
+									<i class="fa fa-shopping-cart"></i>ADD TO CARD
+								</button>
 								<div>
-									<a href="shoping-cart.jsp" class="btn btn-warning btn-sm mt-1">
+									<a th:href="@{/shoppingCart}" class="btn btn-warning btn-sm mt-1">
 										View CART </a>
 								</div>
 
 
 
-							</div> --%>
+							</div>
 						</div>
 					</div>
 				</div>

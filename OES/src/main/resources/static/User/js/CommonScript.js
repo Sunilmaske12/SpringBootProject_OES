@@ -156,13 +156,16 @@ function updateCart(){
 			checkout+=`</table>`
 		
 		$(".check").html(checkout);
+		
 	
 	
 	//=============making orders=================
 							var i=0;
+							$('#orderProducts').val(`${cart}`);
 								cart.map((item)=>{
 								
 								i+=1
+								
 								 $('#productIdO'+i).val(`${item.productId}`);
 								  $('#productNameO'+i).val(`${item.productName}`);
 								   $('#productQuantityO'+i).val(`${item.productQuantity}`);
@@ -410,4 +413,42 @@ function msgErrorPopUp(){
                 }
             });
         }
+
+
+
+// ===============Making order=====================
+function setOrderInCart(){
+	
+		let cart=JSON.parse(localStorage.getItem("cart"));
+		var pid = [];
+		var pname = [];
+		var pquantity = [];
+		var pprice = [];
+		var oid = $('#ORDERID');
+		
+			var i=0;
+								cart.map((item)=>{
+								
+								
+								pid[i] = (item.productId);
+								pname[i] = (item.productName);
+								pquantity[i] = item.productQuantity;
+								pprice[i] = item.productPrice;
+								i+=1;
+							}),
+							
+							
+							$.ajax({
+								type:"POST",
+								url : "/sendCart",
+								data : {
+									pid : pid,
+									pname : pname,
+									pquantity : pquantity,
+									pprice : pprice,
+							
+									}
+							});
+}
+
 

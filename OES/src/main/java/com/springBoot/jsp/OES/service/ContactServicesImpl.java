@@ -39,4 +39,15 @@ public class ContactServicesImpl implements ContactServices {
 		return ticketRepository.findAll();
 	}
 
+	@Override
+	public int saveTicket(ChatTicket ct) {
+		return ticketRepository.save(ct).getTicketId();
+	}
+
+	@Override
+	public void saveChats(Chat chat) {
+		chatRepository.save(chat);
+		
+	}
+
 }

@@ -1,27 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
-
-<%@page import="com.codeo.shop.Dao.CustomerDao"%>
-<%@page import="java.util.List"%>
-<%@page import="com.codeo.shop.entity.Customer"%>
-
-
-<%
-HttpSession session4 = request.getSession();
-String user = (String) session4.getAttribute("usertype");
-if (user == null) {
-
-	session4.setAttribute("message", "You are not logged in, Logged in first");
-	response.sendRedirect("loginfrom.jsp");
-	return;
-}
-int userId = (int) session4.getAttribute("userid");
-String incompleteinfo = (String) session4.getAttribute("incompleteinfo");
-
-//int userId=Integer.parseInt(uId);
-%>
-
-
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <meta name="description" content="Ogani Template">
@@ -31,27 +9,15 @@ String incompleteinfo = (String) session4.getAttribute("incompleteinfo");
 <title>Checkout</title>
 
 <!-- Google Font -->
-<link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"	rel="stylesheet">
 
 
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<script
-	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-	integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
-	integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
-	crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"
-	integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-	crossorigin="anonymous"></script>
+<script	src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Css Styles -->
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
@@ -66,7 +32,7 @@ String incompleteinfo = (String) session4.getAttribute("incompleteinfo");
 
 </head>
 <body
-	<%if (incompleteinfo != null) {
+<!--	<%if (incompleteinfo != null) {
 	if (incompleteinfo.equals("No address")) {%>
 	onload="addressrErrorPopUp()"
 	<%session4.removeAttribute("incompleteinfo");
@@ -74,7 +40,7 @@ String incompleteinfo = (String) session4.getAttribute("incompleteinfo");
 	onload="msgErrorPopUp()"
 	<%session4.removeAttribute("incompleteinfo");
 	}
-}%>>
+}%> --> >
 
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -94,7 +60,7 @@ String incompleteinfo = (String) session4.getAttribute("incompleteinfo");
 					<div class="breadcrumb__text">
 						<h2>Checkout</h2>
 						<div class="breadcrumb__option">
-							<a href="./index.jsp">Home</a> <span>Checkout</span>
+							<a th:href="@{/}">Home</a> <span>Checkout</span>
 						</div>
 					</div>
 				</div>
@@ -116,32 +82,20 @@ String incompleteinfo = (String) session4.getAttribute("incompleteinfo");
 			</div>
 			<div class="checkout__form">
 				<h4>Billing Details</h4>
-				<form method="post" action="OnlinePayment" id="orderPlaceAlert">
+				<form method="post" th:action="@{'/User/makeOrder'+','+${totalAmount }+','+${cartLength}}" id="orderPlaceAlert">
 					<div class="row">
 						<div class=" col-md-6">
 
-							<%
-							CustomerDao cd = new CustomerDao();
-							HttpSession hs = request.getSession();
-							int u_id = (int) hs.getAttribute("userid");
-							List<Customer> address = cd.getAddress(u_id);
-							%>
+			<!-- Address Show Started -->
 
-							<!-- Address Show Started -->
-
-							<div class="card mb-3">
+							<div class="card mb-3" >
 								<div class="card-body">
 									<h4 class="text-dark">Select Your Address</h4>
-									<%
-									if (address.size() != 0) {
-
-										for (Customer a : address) {
-									%>
-									<div class="row checkout-address-row">
+									<div class="row checkout-address-row" th:each="address:${AllAddress }">
 										<div class="col-2 col-md-1">
 											<div class="radio radio-success">
 												<input type="radio" name="address_id"
-													value="<%=a.getC_id()%>" id="addressId"
+													th:value="${address.c_id }" id="addressId"
 													aria-invalid="false" />
 											</div>
 											<span class="badge badge-primary"></span>
@@ -150,31 +104,21 @@ String incompleteinfo = (String) session4.getAttribute("incompleteinfo");
 
 											<div>
 												Mr
-												<%=a.getC_name()%>
-												(<%=a.getC_mobno()%>)
+												<span th:text="${address.c_name }"></span>
+												(<span th:text="${address.c_mobno }" ></span>)
 											</div>
-											<hr class="mt-1 mb-1">
-											<%=a.getC_adderess()%>
+											<hr class="mt-2 mb-2">
+											<span th:text="${address.c_adderess }"></span>
 											, <br>
-
-											<%=a.getC_landmark() + " " + a.getC_city() + " " + a.getC_pincode()%>
-											<a href="EditAddress?id=1994"
+											<span th:text="${address.c_landmark }+' '+${address.c_city }+' '+${address.c_pincode }"></span>
+										<a th:href="@{'/editAddress'+${address.c_id }}"
 												class="badge bg-danger pull-right">Edit</a>
-
-										</div>
+												<hr size="12" width="100%" color="red">
 									</div>
-									<hr size="8" width="100%" color="red">
-									<%
-									}
-
-									} else {
-									%>
-									<h2 style="color: red;">PLEASE PUT YOUR ADDRESS!</h2>
-									<%
-									}
-									%>
-
-
+									</div>
+									<hr size="12" width="100%" color="red">
+									<h2 th:if="${AllAddress == null }" style="color: red; top:10px">PLEASE PUT YOUR ADDRESS!</h2>
+							
 									<div class="row">
 										<div class="col-md-12">
 											<div class="text-center mt-5">
@@ -211,7 +155,7 @@ String incompleteinfo = (String) session4.getAttribute("incompleteinfo");
 								<div class="checkout__order__total">
 									Total <span class="totalPrice"></span>
 								</div>
-								<button type="submit" class="site-btn"
+								<button type="submit" onclick="setOrderInCart()" class="site-btn"
 									style="border-radius: 10px;">MAKE ORDER</button>
 
 							</div>

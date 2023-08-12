@@ -30,7 +30,7 @@
 							</div>
 			<div class="header__top__right_register">
 								<a th:href="@{/loginForm}"><i class="fa fa-user"></i> Login</a>
-								 <a th:href="@{/registrationForm}"><i class="fa fa-user"></i>
+								 <a style="margin-left:10px;" th:href="@{/registrationForm}"><i class="fa fa-user"></i>
 									Register</a>
 							</div>
 							<a onclick="logoutWarning()" th:href="@{/logout}"><i class="fa fa-user"></i> LogOut</a>
@@ -71,8 +71,8 @@
 									 class="cartItem" >0</span></a></li>
 					</ul>
 						<div class="header__cart__price">
-							item: <h4 class="totalOrder"></h4>
-						</div>
+							item: <h4 class="totalOrder">00.00</h4>
+						</div>	 
 					</div>
 				</div>
 					</div>

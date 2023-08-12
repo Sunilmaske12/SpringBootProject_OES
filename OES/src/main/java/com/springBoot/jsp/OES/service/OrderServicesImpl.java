@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.springBoot.jsp.OES.dao.DailyBusinessRepository;
 import com.springBoot.jsp.OES.dao.OrderDetailsRepository;
 import com.springBoot.jsp.OES.dao.OrderRepository;
 import com.springBoot.jsp.OES.entity.Order;
@@ -83,6 +81,33 @@ public class OrderServicesImpl implements OrderServices {
 		}
 		
 		return statusPer;
+	}
+
+	@Override
+	public Order saveOrder(String razopayOrderId, String addressId, int uid, int totalPrice, String paymentMode) {
+		int charges=0;
+		int priceWithCharge = totalPrice;
+		if(totalPrice <= 999) {
+			charges = 100;
+			priceWithCharge = totalPrice+100;
+		}
+		
+		Order order=new Order();
+			order.setAddress_Id(addressId);
+			order.setAmount(totalPrice);
+			order.setCharges(charges);
+			order.setPayment_Mode(paymentMode);
+			order.setRazorpay_Order_Id(razopayOrderId);
+			order.setTotal_Amount(priceWithCharge);
+			order.setUserId(uid);
+			order.setStatus("Waiting");
+		Order o = orderRepository.save(order);
+		return o;
+	}
+
+	@Override
+	public void saveOrderDetails(OrderDetails orderdetail) {
+		orderDetailsRepository.save(orderdetail);		
 	}
 
 }

@@ -65,15 +65,3 @@ function onlinePayment(){
 })
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-

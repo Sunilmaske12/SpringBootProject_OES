@@ -23,6 +23,8 @@ public interface ProductService {
 
 	public String getTotalProduction();
 
+	public List<Product> getRecentProducts();
+
 	
 	
 

@@ -238,6 +238,7 @@ function updateCart(){
 	function clearCart(){
 		
 	localStorage.removeItem('cart');
+	console.log('product sent working');
 	updateCart();
 	}
 	
@@ -248,6 +249,8 @@ function updateCart(){
 	$(document).ready(function(){
 		updateCart()
 	})
+	
+	
 	
 	//================== Cart end=============================
 	
@@ -429,4 +432,5 @@ function msgErrorPopUp(){
   }
 });
  }
+
 
