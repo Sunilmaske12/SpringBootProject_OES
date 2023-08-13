@@ -25,6 +25,8 @@ public interface ProductService {
 
 	public List<Product> getRecentProducts();
 
+	public void saveProduct(Product product);
+
 	
 	
 

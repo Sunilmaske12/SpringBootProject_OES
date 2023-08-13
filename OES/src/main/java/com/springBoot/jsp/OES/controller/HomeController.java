@@ -1,15 +1,25 @@
 package com.springBoot.jsp.OES.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.springBoot.jsp.OES.entity.Banner;
 import com.springBoot.jsp.OES.entity.Category;
@@ -45,6 +55,16 @@ public class HomeController {
 	@Autowired
 	private DailyBusinessServices dailyBusinessServices;
 	
+	@ModelAttribute
+	public void commonData(Model model, @AuthenticationPrincipal CustomUserDetails userDetail)
+	{
+		if(userDetail !=null) {
+			User adminInfo = userServices.getUserById(userDetail.getId());
+			model.addAttribute("aminInfo", adminInfo);
+		}
+		
+	}
+	
 	@RequestMapping("/")
 		public String indexPage(Model model, @AuthenticationPrincipal CustomUserDetails userDetail) {
 		List<Product> recentProducts = productService.getRecentProducts();
@@ -64,10 +84,8 @@ public class HomeController {
 	}
 	
 	@GetMapping("/Admin/viewCategory")
-	public String getviewCategorypage(Model model, @AuthenticationPrincipal CustomUserDetails userDetail) {
-		User adminInfo = userServices.getUserById(userDetail.getId());
+	public String getviewCategorypage(Model model) {
 		List<Category> allCategories = productService.getAllCategories();
-		model.addAttribute("aminInfo", adminInfo);
 		model.addAttribute("allCategories", allCategories);
 		return "View_Category";
 	}
@@ -83,15 +101,42 @@ public class HomeController {
 
 	@GetMapping("/Admin/addProduct")
 	public String getAddProductPage(Model model) {
-		// DailyBusiness dailyOnline
+		List<Category> allCat = productService.getAllCategories();
+			model.addAttribute("product", new Product());
+		model.addAttribute("categories", allCat);
 		return "Add-product";
 	}
+	
+	@PostMapping("/Admin/saveProduct")
+	public String saveProduct(Model model, @RequestParam("Image") MultipartFile file, @ModelAttribute Product product) {
+		
+		//setting image name
+		
+		if(file!=null) {
+			product.setProd_imageName(file.getOriginalFilename());
+		}
+		
+		//uploading image to folder
+		File saveFile;
+		try {
+		
+			saveFile = new ClassPathResource("static/img/product").getFile();
+				Path path = Paths.get(saveFile.getAbsolutePath()+File.separator+file.getOriginalFilename());
+				Files.copy(file.getInputStream(), path);
+	
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		productService.saveProduct(product);
+		
+		return "redirect:/Admin/addProduct";
+	}
+	
 
 	@GetMapping("/Admin/calender")
-	public String getCalenderPage(Model model, @AuthenticationPrincipal CustomUserDetails userDetail) {
-		User adminInfo = userServices.getUserById(userDetail.getId());
-		model.addAttribute("aminInfo", adminInfo);
-		// DailyBusiness dailyOnline
+	public String getCalenderPage(Model model) {
+		
 		return "calender";
 	}
 
@@ -120,7 +165,7 @@ public class HomeController {
 		model.addAttribute("totalUsers", totalUsers);
 		model.addAttribute("totalOrders", totalOrders);
 		model.addAttribute("totalSales", totalSales);
-		model.addAttribute("totalEarning", totalSales*0.20);
+		model.addAttribute("totalEarning", (int)(totalSales*0.20));
 		model.addAttribute("aminInfo", adminInfo);
 		model.addAttribute("newUsers", newUsers);
 		model.addAttribute("newOrders", newOrders);

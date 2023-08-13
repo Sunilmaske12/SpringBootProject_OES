@@ -1,9 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@page import="com.codeo.shop.entity.Banner" %>
-<%@page import="com.codeo.shop.Dao.BannerDao" %>
-<!--  <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>  -->
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -62,9 +56,8 @@
 
 	<div class="wrapper nav-collapsed menu-collapsed">
 
-		<%@include file="Asidebar.jsp"%>
-
-		<%@include file="Navbar.jsp"%>
+	<aside th:replace="~{/UserHeaderFooter/Asidebar::Asidebar}"></aside>
+		<nav th:replace="~{/UserHeaderFooter/Navbar::Navbar}"></nav>
 
 		<div class="main-panel">
 			<div class="main-content">

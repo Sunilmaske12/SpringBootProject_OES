@@ -39,6 +39,8 @@ function onlinePayment(payment){
     let oid=response.razorpay_order_id;
     $('#paymentId').val(`${pid}`);
     $('#ROrderId').val(`${oid}`);
+    console.log('oid');
+    console.log(oid);
    if(pid!=null){
 	 $("#orderPayment").html(`	<h5 style="color:green">Payment successfully done!</h5>
 							<button type="submit"  class="site-btn" style="border-radius:10px;">PLACE ORDER</button>`);  

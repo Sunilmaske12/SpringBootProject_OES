@@ -427,18 +427,14 @@ function setOrderInCart(){
 		var oid = $('#ORDERID');
 		
 			var i=0;
-								cart.map((item)=>{
-								
-								
-								pid[i] = (item.productId);
-								pname[i] = (item.productName);
-								pquantity[i] = item.productQuantity;
-								pprice[i] = item.productPrice;
-								i+=1;
+				cart.map((item)=>{
+			pid[i] = (item.productId);
+			pname[i] = (item.productName);
+			pquantity[i] = item.productQuantity;
+			pprice[i] = item.productPrice;
+			i+=1;
 							}),
-							
-							
-							$.ajax({
+			$.ajax({
 								type:"POST",
 								url : "/sendCart",
 								data : {

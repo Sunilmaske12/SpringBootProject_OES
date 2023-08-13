@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -16,7 +15,7 @@
 <meta name="apple-touch-fullscreen" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <!-- all  CSS-->
-<%@include file="component/AllCssFIles.jsp" %>
+
 <!-- BEGIN APEX CSS-->
 <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
 </head>
@@ -24,8 +23,8 @@
 <body data-col="2-columns" class=" 2-columns ">
 
 	<div class="wrapper nav-collapsed menu-collapsed">
- <aside th:replace="/UserHeaderFooter/Asidebar::Asidebar"></aside> 
-	<nav th:replace="/UserHeaderFooter/Navbar::Navbar"></nav>
+	<aside th:replace="~{/UserHeaderFooter/Asidebar::Asidebar}"></aside>
+		<nav th:replace="~{/UserHeaderFooter/Navbar::Navbar}"></nav>
 
 		<div class="main-panel">
 			<div class="main-content">
@@ -63,7 +62,7 @@
 													<td th:text="${banner.Banner_name }"></td>
 													<td  th:text="${banner.Date }"></td>
 													<td  >
-													<div th:if="${banner.Action == 'Active'}">>
+													<div th:if="${banner.Action == 'Active'}">
 															<button  type="button" class="btn btn-success">Active</button>
 															<button  type="button"
 																class="btn btn-success dropdown-toggle dropdown-toggle-split"
@@ -75,7 +74,7 @@
 													
 													
 													
-													<div th:unless="${banner.Action == 'Active'}">>
+													<div th:unless="${banner.Action == 'Active'}">
 															<button  type="button" class="btn btn-danger">In-Active</button>
 															<button  type="button"
 																class="btn btn-danger dropdown-toggle dropdown-toggle-split"

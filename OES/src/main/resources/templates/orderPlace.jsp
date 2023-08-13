@@ -29,7 +29,7 @@
 
 
 </head>
-<input type="hidden" value="<%= orderId%>" id="orderId"> 
+
 <body<!--  <%if(incompleteinfo!=null){
 	if(incompleteinfo.equals("No address")){
 		%>
@@ -92,7 +92,7 @@
 								<a class="paymentOrder"></a>
 					</div>	
 							
-								
+								<input th:type="hidden" th:value="${razorpayPaymentId}" id="orderId"> 
 								<input type="hidden" name="paymentId" id="paymentId">
 								<input type="hidden" name="razorpayOrdertId" id="ROrderId">
 								<input type="hidden" name="user_id" th:value="${userId }">

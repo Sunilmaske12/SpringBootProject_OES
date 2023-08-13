@@ -149,7 +149,6 @@ public class OrderController {
 		System.out.println(order);	
 		String o_id=order.get("id");
 		model.addAttribute("razorpayPaymentId", o_id);
-		model.addAttribute("order_Id", o_id);
 		} catch (RazorpayException e) {
 			e.printStackTrace();
 		}

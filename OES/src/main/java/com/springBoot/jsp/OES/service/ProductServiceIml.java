@@ -90,6 +90,11 @@ public class ProductServiceIml implements ProductService{
 		return p2;
 	}
 
+	@Override
+	public void saveProduct(Product product) {
+		theProductRepository.save(product);		
+	}
+
 	
 	
 }

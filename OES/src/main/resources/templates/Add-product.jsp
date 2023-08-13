@@ -1,11 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@page import="com.codeo.shop.Dao.CategoryDao"%>
-<%@page import="java.util.List"%>
-<%@page import="com.codeo.shop.entity.Category"%>
-<!--  <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>  -->
-
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,8 +9,7 @@
 <meta name="keywords"
 	content="admin template, Apex admin template, dashboard template, flat admin template, responsive admin template, web app">
 <meta name="author" content="PIXINVENT">
-<title>Basic DataTables - Apex responsive bootstrap 4 admin
-	template</title>
+<title>Admin - Add_Products</title>
 <link rel="apple-touch-icon" sizes="60x60"
 	href="app-assets/img/ico/apple-icon-60.html">
 <link rel="apple-touch-icon" sizes="76x76"
@@ -59,17 +51,15 @@
 <body data-col="2-columns" class=" 2-columns ">
 
 	<div class="wrapper nav-collapsed menu-collapsed">
-
-		<%@include file="Asidebar.jsp"%>
-
-		<%@include file="Navbar.jsp"%>
+		<aside th:replace="~{/UserHeaderFooter/Asidebar::Asidebar}"></aside>
+		<nav th:replace="~{/UserHeaderFooter/Navbar::Navbar}"></nav>
 
 		<div class="main-panel">
 			<div class="main-content">
 				<div class="content-wrapper">
 
 					<div class="mb-3">
-						<a href="View_product.jsp"
+						<a th:href="@{/Admin/viewProduct}"
 							class="btn btn-raised gradient-crystal-clear white"><i
 							class="fa fa-plus " aria-hidden="true"></i> View Product List </a>
 					</div>
@@ -85,85 +75,55 @@
 									<div class="card-body">
 										<div class="px-3">
 											<!-- form start -->
-											<form class="form" action="Productoperation" method="post" enctype="multipart/form-data">
+											<form class="form" th:action="@{/Admin/saveProduct}"
+												th:object="${product}" method="post"
+												enctype="multipart/form-data">
 												<div class="form-body">
 													<div class="form-group">
 														<label for="eventRegInput1">Enter Product Name </label> <input
 															type="text" id="eventRegInput1" class="form-control"
-															name="p_name"
-															value="<c:out value="${product.prod_name}"></c:out>" />
+															name="prod_name" />
 													</div>
-
-													<%
-					                           CategoryDao cdao = new CategoryDao();
-						                       		List<Category> list = cdao.getCategoryList();
-						                       %>
-
 													<div class="form-group">
 														<label for="eventRegInput1">Enter Product
 															description </label>
 														<textarea id="donationinput7" rows="5"
-															class="form-control square" name="p_desc"
-															value='<c:out value="${product.prod_description}"></c:out>' /></textarea>
+															class="form-control square" name="prod_description"/></textarea>
 													</div>
-													
-													
-													<!--  
-													<div class="form-group">
-														<label for="eventRegInput1">Enter Product description </label>
-														<input type="text" 	class="form-control" name="p_price" style="height:150px"
-															value='<c:out value="${product.prod_description}" ></c:out>' />	
-													</div>
-														 -->
-
 													<div class="form-group">
 														<label>Enter Product Price </label> <input type="text"
-															class="form-control" name="p_price"
-															value='<c:out value="${product.prod_price}"></c:out>' />
+															class="form-control" name="prod_price" />
 													</div>
 
 													<div class="form-group">
 														<label>Enter Product Discount </label> <input type="text"
-															class="form-control" name="p_discount"
-															value='<c:out value="${product.prod_discount}"></c:out>' />
+															class="form-control" name="prod_discount" />
 													</div>
-                                                     
-													<div class="form-group">
-														<!-- <label >product id</label>   -->
 
-														<input type="hidden" class="form-control" name="id" />
-													</div>
+													
 
 													<div class="form-group">
 														<label>Enter Product Quntity </label> <input type="text"
-															class="form-control" name="p_quntity"
-															value='<c:out value="${product.prod_quantity}"></c:out>' />
+															class="form-control" name="prod_quantity"/>
 													</div>
 
 													<div class="form-group">
-														<label> Product Image </label>
-														 <input type="file"	class="form-control" name="p_image" value='<c:out value="${product.prod_imageName}"></c:out>' />
+														<label> Product Image </label> <input type="file"
+															class="form-control" name="Image" />
 													</div>
-													<input type="hidden" name="action" value="insert" />
-														
 												</div>
 
-                                            
+
 												<div class="form-group">
 													<label>Enter Product Category </label> <select
 														class="form-control" name="cid">
-														<%
-								for(Category c :list){
-						%>
-														<option value="<%= c.getId() %>"><%=c.getCat_title() %>
+														<option th:each="categories : ${categories}" th:text=" ${categories.Cat_title}" th:value="${categories.Id}">
 														</option>
-														<% } %>
 													</select>
 												</div>
 
-
 												<div class="form-actions center">
-													
+
 													<button type="submit" class="btn btn-raised btn-primary">
 														<i class="fa fa-check-square-o"></i>Add Product
 													</button>

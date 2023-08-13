@@ -70,8 +70,8 @@
 
 	<div class="wrapper nav-collapsed menu-collapsed">
 	
-	 <aside th:replace="/UserHeaderFooter/Asidebar::Asidebar"></aside> 
-	<nav th:replace="/UserHeaderFooter/Navbar::Navbar"></nav>
+	<aside th:replace="~{/UserHeaderFooter/Asidebar::Asidebar}"></aside>
+		<nav th:replace="~{/UserHeaderFooter/Navbar::Navbar}"></nav>
 
 		<div class="main-panel">
 			<div class="main-content">

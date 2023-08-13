@@ -21,9 +21,9 @@
 <body data-col="2-columns" class=" 2-columns ">
 
 	<div class="wrapper nav-collapsed menu-collapsed">
-	<nav th:replace="/UserHeaderFooter/Navbar::Navbar"></nav>
-		<aside th:replace="/UserHeaderFooter/Asidebar::Asidebar"></aside> 
-	
+	<aside th:replace="~{/UserHeaderFooter/Asidebar::Asidebar}"></aside>
+		<nav th:replace="~{/UserHeaderFooter/Navbar::Navbar}"></nav>
+
 		
 		<div class="main-panel">
 			<div class="main-content">

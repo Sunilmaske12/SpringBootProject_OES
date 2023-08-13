@@ -10,8 +10,7 @@
 <meta name="keywords"
 	content="admin template, Apex admin template, dashboard template, flat admin template, responsive admin template, web app">
 <meta name="author" content="PIXINVENT">
-<title>Basic DataTables - Apex responsive bootstrap 4 admin
-	template</title>
+<title>All Products</title>
 <link rel="apple-touch-icon" sizes="60x60"
 	href="app-assets/img/ico/apple-icon-60.html">
 <link rel="apple-touch-icon" sizes="76x76"
@@ -59,7 +58,7 @@
 				<div class="content-wrapper">
 
 					<div class="mb-3">
-						<a th:href="@{/addNewProduct}"
+						<a th:href="@{/Admin/addProduct}"
 							class="btn btn-raised gradient-crystal-clear white"><i
 							class="fa fa-plus " aria-hidden="true"></i> Add Product </a>
 					</div>

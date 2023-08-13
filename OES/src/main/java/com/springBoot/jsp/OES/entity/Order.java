@@ -30,7 +30,7 @@ public class Order {
 	String Status;
 	@Column(insertable = false)
 	String seen;
-	@Column(insertable = false)
+	@Column(nullable = true)
 	String Razorpay_Order_Id;
 	
 	public Order() {

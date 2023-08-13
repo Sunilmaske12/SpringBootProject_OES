@@ -92,6 +92,14 @@ public class Product {
 		int price = (int) (Integer.parseInt(this.prod_price) - (Integer.parseInt(this.prod_price)*Integer.parseInt(this.prod_discount)*0.01));
 		return price;
 	}
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", prod_name=" + prod_name + ", prod_description=" + prod_description
+				+ ", prod_price=" + prod_price + ", prod_discount=" + prod_discount + ", prod_quantity=" + prod_quantity
+				+ ", prod_imageName=" + prod_imageName + ", cid=" + cid + "]";
+	}
+	
+	
 	
 	
 
