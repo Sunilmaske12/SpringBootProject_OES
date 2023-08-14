@@ -88,7 +88,7 @@ function updateCart(){
 								<tbody>
 								<tr>
 									<td class="shoping__cart__item"><img
-										src="img/latest-product/${item.pImageName}"
+										src="img/product/${item.pImageName}"
 										alt="product_image" style="height: 80px">
 										<h5> ${item.productName}</h5></td>
 									
@@ -158,21 +158,6 @@ function updateCart(){
 		$(".check").html(checkout);
 	
 	
-	//=============making orders=================
-							var i=0;
-								cart.map((item)=>{
-								
-								i+=1
-								 $('#productIdO'+i).val(`${item.productId}`);
-								  $('#productNameO'+i).val(`${item.productName}`);
-								   $('#productQuantityO'+i).val(`${item.productQuantity}`);
-								    $('#productPriceO'+i).val(`${item.productPrice}`);
-								   						
-							
-							})
-							
-		
-	//===============================
 	
 	}
 	}
@@ -331,7 +316,7 @@ function updateLike(){
 		<div class="featured__item m-4">
 			<div class="featured__item__pic set-bg">
 				<img style="max-height: 200px; height: auto;" class="center"
-					src="img/latest-product/${item.lImageName}">
+					src="img/product/${item.lImageName}">
 				<ul class="featured__item__pic__hover">
 					<li><a onclick="likeProducts(${item.lproductId}, '${item.lproductName}', ${item.lproductPrice}, '${item.lImageName}')" ><i class="fa fa-heart"></i></a></li>
 					<li><a href="#"><i class="fa fa-retweet"></i></a></li>

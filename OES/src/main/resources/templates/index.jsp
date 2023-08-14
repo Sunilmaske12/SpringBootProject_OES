@@ -41,9 +41,12 @@
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-	<header th:replace="/UserHeaderFooter/header::userHeader"></header>
+	<header th:replace="~{/UserHeaderFooter/header::userHeader}"></header>
 	
 	<jsp:include page="CommonModal.jsp" />
+	<div th:replace="~{/CommonModal::myProfile}"></div>
+	
+	
 	<!--  for product and category  -->
 	
 	<!-- Toast msg -->
@@ -85,8 +88,7 @@
 						<div class="hero__search__phone">
 							<div class="hero__search__phone__icon">
 								<button data-bs-toggle="modal" data-bs-target="#UserProfile"><img
-									alt="icon" src="img/hero/icon.png"> </button>>
-									
+									style="border-radius:50%" alt="icon" src="img/hero/icon.png"> </button>									
 							</div>
 							
 							
@@ -284,10 +286,10 @@
 						
 						
 					 	<div class="featured__item__pic set-bg "
-								th:style="'background-image: url(&quot;img/latest-product/'+${product.Prod_imageName}+'&quot;);'">
+								th:style="'background-image: url(&quot;img/product/'+${product.Prod_imageName}+'&quot;);'">
 								<a th:href="@{'/productDetails'+${product.Id }+','+${product.cid}}">
 									<img style="max-height: 200px; height: auto;" class="center"
-									th:src="'img/latest-product/'+${product.Prod_imageName}">
+									th:src="'img/product/'+${product.Prod_imageName}">
 								</a>
 								<ul class="featured__item__pic__hover">
 									<li><a
@@ -349,7 +351,7 @@
 
 	
 
-	<footer  th:replace="/UserHeaderFooter/footer::userFooter"></footer>
+	<footer  th:replace="~{/UserHeaderFooter/footer::userFooter}"></footer>
 
 	<!-- Js Plugins -->
 	<script src="js/jquery-3.3.1.min.js"></script>

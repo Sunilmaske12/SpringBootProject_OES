@@ -19,7 +19,7 @@ public class User {
       private String user_adderess;
       private String user_emailid;
       private String user_pass;
-	  private String  user_type="Normal User";
+	  private String  user_type="ROLE_USER";
 	  private String seen="No";
 	public int getId() {
 		return id;
@@ -68,6 +68,12 @@ public class User {
 	}
 	public void setSeen(String seen) {
 		this.seen = seen;
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", user_name=" + user_name + ", user_mobno=" + user_mobno + ", user_adderess="
+				+ user_adderess + ", user_emailid=" + user_emailid + ", user_pass=" + user_pass + ", user_type="
+				+ user_type + ", seen=" + seen + "]";
 	}
 	
 	

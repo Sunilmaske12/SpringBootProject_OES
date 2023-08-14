@@ -8,16 +8,10 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Online Electrical Shopee</title>
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<link	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"	rel="stylesheet">
+<script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<link	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"	rel="stylesheet">
 
-
-<link
-	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-	rel="stylesheet">
 <!-- Css Styles -->
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -34,7 +28,7 @@
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-	<header th:replace="/UserHeaderFooter/header::userHeader"></header>
+	<header th:replace="~{/UserHeaderFooter/header::userHeader}"></header>
 	
 	<jsp:include page="CommonModal.jsp" />
 	<!--  for product and category  -->
@@ -94,21 +88,16 @@
 						</ul>
 					</div>
 				</div>
-
 				
 				<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat "
-				th:each="product:${allProduct}"
-				>
+				th:each="product:${allProduct}">
 					<div style="border: 1px solid grey;" class="mt-5">
 						<div class="featured__item m-4 ">
-
-
-
 							<div class="featured__item__pic set-bg "
-								th:style="'background-image: url(&quot;img/latest-product/'+${product.Prod_imageName}+'&quot;);'">
+								th:style="'background-image: url(&quot;img/product/'+${product.Prod_imageName}+'&quot;);'">
 								<a th:href="@{'/productDetails'+${product.Id }+','+${product.cid}}">
 									<img style="max-height: 200px; height: auto;" class="center"
-									th:src="'img/latest-product/'+${product.Prod_imageName}">
+									th:src="'img/product/'+${product.Prod_imageName}">
 								</a>
 								<ul class="featured__item__pic__hover">
 									<li><a
@@ -147,30 +136,17 @@
 									<a th:href="@{/shoppingCart}" class="btn btn-warning btn-sm mt-1">
 										View CART </a>
 								</div>
-
-
-
 							</div>
 						</div>
 					</div>
 				</div>
-
-			
 			</div>
-
 		</div>
 	</section>
 	<!-- Featured Section End -->
-
-
 	<br>
 	<br>
 	<br>
-
-
-
-
-
 
 <footer  th:replace="/UserHeaderFooter/footer::userFooter"></footer>
 
@@ -186,5 +162,4 @@
 	<script type="text/javascript" src="js/CommonScript.js"></script>
 
 </body>
-
 </html>

@@ -61,6 +61,7 @@ public class HomeController {
 		if(userDetail !=null) {
 			User adminInfo = userServices.getUserById(userDetail.getId());
 			model.addAttribute("aminInfo", adminInfo);
+			model.addAttribute("userInfo", adminInfo);
 		}
 		
 	}

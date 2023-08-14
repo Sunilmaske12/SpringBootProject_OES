@@ -96,7 +96,7 @@
 												<tr th:each="allCategories,status:${allCategories }">
 													<td th:text="${status.index+1 }"></td>
 													<td th:text="${allCategories.Cat_title }"></td>
-													<td th:text="${allCategories.cat_description }"></td>
+													<td style="max-width:300px;" th:text="${allCategories.cat_description }"></td>
 
 													<td><a
 														th:href="@{'/Admin/deleteCategory'+${allCategories.Id}}"><i

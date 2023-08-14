@@ -1,17 +1,8 @@
-
-
-<%@page import="java.util.*"%>
-<%@page import="com.codeo.shop.dbutil.ConnectionProvider"%>
-<%@page import="com.codeo.shop.Dao.UserDaoImpl"%>
-<%@page import="java.sql.*"%>
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-
-
 <style>
 .my_profile {
 	color: red;
@@ -79,97 +70,69 @@ input, button, select, optgroup, textarea {
 	line-height: inherit;
 }
 </style>
-
 </head>
 <body>
 
 
-	<%
-	HttpSession session2 = request.getSession();
-	String user_name = (String) session2.getAttribute("UserName");
 
-	if (user_name == null) {
-	%>
-	<!-- login modal if user=null -->
-	<div class="modal" tabindex="-1" id="UserProfile">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h3 class="modal-title">My Profile</h3>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<h4>You are not login, login first.</h4>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Close</button>
-					<a href="loginfrom.jsp"><button type="button"
-							class="btn btn-primary">Login</button></a> <a
-						href="RegistrationForm.jsp"><button type="button"
-							class="btn btn-primary">Register</button></a>
-				</div>
-			</div>
-		</div>
-	</div>
+<!--===================1.  My Profile modal Start for user ===================== -->
+<!--=================== My Profile modal Start for user ===================== -->
+<!--=================== My Profile modal Start for user ===================== -->
 
 
+	<!--=================== My Profile modal Start for user ===================== -->
 
-
-
-	<%
-	return;
-	}
-	%>
-
-
-
-	<!-- My Profile modal Start-->
-
-
-	<!--My Profile Modal-user -->
-	<div class="modal fade" id="UserProfile" tabindex="-1"
+	<div th:fragment="myProfile" class="modal fade" id="UserProfile" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">
+			<div  class="modal-content">
 				<div class="modal-header">
 					<h3 class="my_profile" id="exampleModalLabel">My Profile</h3>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<div class="modal-body">
+				
+					<div th:if="${userInfo == null }">
+						<div class="modal-body">
+							<h4>You are not login, login first.</h4>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">Close</button>
+							<a th:href="@{/loginForm}"><button type="button"
+									class="btn btn-primary">Login</button></a> <a
+								th:href="@{/registrationForm}"><button type="button"
+									class="btn btn-primary">Register</button></a>
+						</div>
+				</div>
+				
+				<div  th:unless="${userInfo == null }" class="modal-body">
 					<div>
 						<section style="background-color: #eee;">
 
 							<div class="card mb-4">
-							<%
-									int user_id = (int) session2.getAttribute("userid");
-							UserDaoImpl udi=new UserDaoImpl();
-							ResultSet rs=udi.getUserbyId(user_id);
-							
-																		while (rs.next()) {
-										String User_MoNo = String.valueOf(rs.getString("user_mobno"));
-									%>
-							<form action="edit_user?id=<%=rs.getInt("user_id")%>" method="post">
+			
+						<form th:object="${userInfo}" th:action="@{/User/editUser}"   method="POST">
+								
+								<input type="hidden" name="id" th:value="${userInfo.id}" />
+								<input type="hidden" name="user_pass" th:value="${userInfo.user_pass}" />
+								<input type="hidden" name="user_emailid" th:value="${userInfo.user_emailid}" />
+								<input type="hidden" name="user_type" th:value="${userInfo.user_type}" />
+						
 								<div>
-									
 									<div class="card-body text-center" style="text-align: center;">
 										<img src="img/hero/icon.png" alt="avatar"
 											class="rounded-circle img-fluid" style="width: 150px;">
 									</div>
-
-									
-									<table class="table table-user-information">
+						<table class="table table-user-information">
 											<tbody>
 												<tr>
-													<td><strong> <span
-															class="glyphicon glyphicon-asterisk text-primary"></span>
+													<td><strong> <span	class="glyphicon glyphicon-asterisk text-primary"></span>
 															Full Name
 													</strong></td>
 
 													<td class="text-primary">: <input type="text"
-														name="name" value="<%=rs.getString("user_name")%>" /></td>
+														name="user_name" th:value="${userInfo.user_name}" /></td>
 												</tr>
 												<tr>
 													<td><strong> <span
@@ -177,15 +140,14 @@ input, button, select, optgroup, textarea {
 															Contact Details
 													</strong></td>
 													<td class="text-primary">: <input type="text"
-														name="Mobile" value="<%=User_MoNo%>" /></td>
+														name="user_mobno" th:value="${userInfo.user_mobno }" /></td>
 												</tr>
 												<tr>
 													<td><strong> <span
 															class="glyphicon glyphicon-asterisk text-primary"></span>
 															Email Id
 													</strong></td>
-													<td class="">: 
-													<%=rs.getString("user_emailid")%></td>
+													<td  th:text="': '+${userInfo.user_emailid }"></td>
 												</tr>
 												<tr>
 													<td><strong> <span
@@ -193,7 +155,7 @@ input, button, select, optgroup, textarea {
 															Addresss
 													</strong></td>
 													<td class="text-primary">: <input type="text"
-														name="address" value="<%=rs.getString("user_adderess")%>" /></td>
+														name="user_adderess" th:value="${userInfo.user_adderess }" /></td>
 												</tr>
 											</tbody>
 										</table>
@@ -201,7 +163,6 @@ input, button, select, optgroup, textarea {
 
 
 								</div>
-								<input type="hidden" value="user" name="page"> 
 								<div class="modal-footer">
 								<button  id='closeModal' type="button" class="btn btn-danger"
 										data-bs-dismiss="modal">Close</button>
@@ -219,8 +180,7 @@ input, button, select, optgroup, textarea {
 
 	</div>
 
-	<!-- My Profile end -->
-
+<!--=================== My Profile modal end for user ===================== -->
 
 
 

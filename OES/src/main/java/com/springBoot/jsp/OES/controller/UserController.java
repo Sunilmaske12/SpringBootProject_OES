@@ -1,7 +1,6 @@
 package com.springBoot.jsp.OES.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import com.springBoot.jsp.OES.entity.User;
 import com.springBoot.jsp.OES.securityConfig.CustomUserDetails;
 import com.springBoot.jsp.OES.service.UserServices;
@@ -50,6 +48,13 @@ public class UserController {
 	  @PostMapping("/loginUser")
 	  public String loginUser() {
 		  return null;
+	  }
+	  
+	  @PostMapping("/User/editUser")
+	  public String updateUser(@ModelAttribute("userInfo") User user)
+	  {
+		  userServices.saveUser(user);
+		  return "redirect:/";
 	  }
 	  
 	@GetMapping("/Admin/userList")

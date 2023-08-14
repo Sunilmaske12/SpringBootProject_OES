@@ -70,7 +70,7 @@
                                 src="img/product/details/product-details-1.jpg" alt="">  -->
 
 							<img class="product__details__pic__item--large"
-								th:src="'img/latest-product/'+${product.Prod_imageName}"
+								th:src="'img/product/'+${product.Prod_imageName}"
 								alt="">
 						</div>
 					</div>
@@ -164,9 +164,9 @@
 				<div style="border: 1px solid grey; " class="mt-5">
 					<div class="featured__item m-4">
 						<div  class="featured__item__pic set-bg"
-							 style="background-image: url(&quot;img/latest-product/<%=catproduct.getProd_imageName() %>&quot;);">
+							 style="background-image: url(&quot;img/product/<%=catproduct.getProd_imageName() %>&quot;);">
 								<a th:href="@{'/productDetails'+${relatedProduct.Id }+','+${relatedProduct.cid}}">
-								<img style="max-height: 200px; height:auto; " class="center" th:src="'img/latest-product/'+${relatedProduct.Prod_imageName}">>
+								<img style="max-height: 200px; height:auto; " class="center" th:src="'img/product/'+${relatedProduct.Prod_imageName}">>
 							    </a>
 							<ul class="featured__item__pic__hover">
 									<li><a th:onclick="likeProducts([[${product.Id }]],[[${product.Prod_name }]],[[${product.PriceAfterDiscount}]],[[${product.Prod_imageName}]])" ><i class="fa fa-heart"></i></a></li>

@@ -81,7 +81,7 @@
 													<td th:text="${userList.user_mobno }"></td>
 													<td th:text="${userList.user_adderess }"></td>
 													<td th:text="${userList.user_emailid }"></td>
-													<td th:text="${userList.user_pass }"></td>
+													<td style="max-width:200px" th:text="${userList.user_pass }"></td>
 
 		<td><a th:href="@{'/userOperation'+','+'DELETE'+','+${userList.id }}"><i class="ft-trash font-medium-3 red"></i></a>|| 
 		<a th:href="@{'/userOperation'+','+'EDIT'+','+${userList.id }}"><i class="ft-edit orange"></i></a></td>	</tr>

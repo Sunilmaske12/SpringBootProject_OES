@@ -71,7 +71,7 @@
 									</div>
 									<div class="card-body">
 										<div class="card-block">
-											<table class="table table-responsive-md text-center">
+											<table class="table table-responsive-md table-fixed text-center">
 												<thead>
 													<tr>
 														<th>Sr<br>No
@@ -81,18 +81,18 @@
 														<th>Price</th>
 														<th>Discount</th>
 														<th>Quantity</th>
-														<th>Image</th>
+														<th >Image</th>
 														<th>Action</th>
                                                    </tr>
 												</thead>
 												<tr th:each="product,status:${allProduct }">
-													<td th:text="${status.index+1}"></td>
+													<td  th:text="${status.index+1}"></td>
 													<td th:text="${product.prod_name }"></td>
-													<td  th:text="${product.prod_description }"></td>
+													<td  style="max-width:300px;" th:text="${product.prod_description }"></td>
 													<td  th:text="${product.prod_price }"></td>
 													<td  th:text="${product.prod_discount }"></td>
 													<td  th:text="${product.prod_quantity }"></td>
-													<td  th:text="${product.prod_imageName }"></td>
+													<td style="max-width:200px " th:text="${product.prod_imageName }"></td>
                                                    
 												    <td><a	th:href="@{'/productOperation'+','+'DELETE'+','+${product.id}}">
 												    	<i class="ft-trash font-medium-3 red"></i> </a>|| <a
