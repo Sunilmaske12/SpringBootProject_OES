@@ -13,23 +13,29 @@ import com.springBoot.jsp.OES.entity.Customer;
 public class CustomerServicesImpl implements CustomerServices {
 	
 	@Autowired
-	private CustomerRepository cr;
+	private CustomerRepository customerRepository;
 
 	@Override
 	public Customer getCustomerById(int aid) {
-		Optional<Customer> getCustomer = cr.findById(aid);
+		Optional<Customer> getCustomer = customerRepository.findById(aid);
 		Customer customer = getCustomer.get();
 		return customer;
 	}
 
 	@Override
 	public String getCustomerName(String aid) {
-		return cr.getCustomerName(aid);
+		return customerRepository.getCustomerName(aid);
 	}
 
 	@Override
 	public List<Customer> getAllCustomerWithAddress(int id) {
-		return cr.findAll();
+		return customerRepository.findAll();
+	}
+
+	@Override
+	public void insertCustomer(Customer customer) {
+		customerRepository.save(customer);
+		
 	}
 
 }

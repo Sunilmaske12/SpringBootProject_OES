@@ -44,7 +44,11 @@ public class OrderServicesImpl implements OrderServices {
 
 	@Override
 	public int getTotalSell() {
-		return orderRepository.getTotalSells();
+		String totalSell= orderRepository.getTotalSells();
+		if(totalSell == null) {
+			return 0;
+		}
+		return Integer.parseInt(totalSell);
 	}
 
 	@Override

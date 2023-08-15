@@ -12,7 +12,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	List<Order> findByUserId(int id);
 
 	@Query("select SUM(Total_Amount) from Order")
-	int getTotalSells();
+	String getTotalSells();
 	
 	int countBySeen(String string);
 	

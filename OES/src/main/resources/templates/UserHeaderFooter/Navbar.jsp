@@ -4,7 +4,8 @@
 
 </head>
 <body data-col="2-columns" class=" 2-columns " th:fragment="Navbar">
-	<jsp:include page="CommonModal.jsp" />
+
+	<span th:replace="~{/CommonModal::AdminProfile}"></span>
 	
 	
 	<!-- Navbar (Header) Starts-->
@@ -60,7 +61,7 @@
 										class="noti-wrapper"><span
 											class="noti-title line-height-1 d-block text-bold-400 info">
 												<span th:if="${newOrders!=0 }" style="color: #8B0000; font-size: 150%;" th:text="${newOrders }"></span>
-												<span th:unless="${newOrders!=0 }" style="color: #8B0000; font-size: 150%;" >>No Any</span>
+												<span th:unless="${newOrders!=0 }" style="color: #8B0000; font-size: 150%;" >No Any</span>
 												 New Order Received
 										</span><span class="noti-text"> Click Here, To See All New
 												Orders.</span></span> </a> <a href="UserList.jsp"

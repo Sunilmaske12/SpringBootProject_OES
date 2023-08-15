@@ -62,6 +62,7 @@ public class HomeController {
 			User adminInfo = userServices.getUserById(userDetail.getId());
 			model.addAttribute("aminInfo", adminInfo);
 			model.addAttribute("userInfo", adminInfo);
+			model.addAttribute("userId", adminInfo.getId());
 		}
 		
 	}
@@ -83,6 +84,13 @@ public class HomeController {
 		// DailyBusiness dailyOnline
 		return "loginform";
 	}
+	
+	 @PostMapping("/Admin/updateAdmin")
+	  public String updateAdmin(@ModelAttribute("userInfo") User user)
+	  {
+		  userServices.saveUser(user);
+		  return "redirect:/Admin/adminPannel";
+	  }
 	
 	@GetMapping("/Admin/viewCategory")
 	public String getviewCategorypage(Model model) {

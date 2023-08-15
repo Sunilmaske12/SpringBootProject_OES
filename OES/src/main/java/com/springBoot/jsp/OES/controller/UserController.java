@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import com.springBoot.jsp.OES.entity.Customer;
 import com.springBoot.jsp.OES.entity.User;
 import com.springBoot.jsp.OES.securityConfig.CustomUserDetails;
+import com.springBoot.jsp.OES.service.CustomerServices;
 import com.springBoot.jsp.OES.service.UserServices;
 
 @Controller
@@ -22,6 +25,9 @@ public class UserController {
 	
 	@Autowired
 	private UserServices userServices;
+	
+	@Autowired
+	private CustomerServices customerService;
 	
 	@GetMapping("/registrationForm")
 	public String myRegistrationForm(Model model) {
@@ -37,7 +43,7 @@ public class UserController {
 			user.setUser_pass(passwordEncoder.encode(user.getUser_pass()));
 
 		  userServices.saveUser(user); 
-	  return  "redirect:/registrationForm";
+	  return  "loginform";
 	  }
 	  
 	  @GetMapping("/customLogin")
@@ -75,7 +81,11 @@ public class UserController {
 		return "redirect:/userList";
 	}
 	
-	
-
+	@PostMapping("/User/saveAddress")
+	public String saveAdress(@ModelAttribute Customer customer)
+	{
+		customerService.insertCustomer(customer);
+		return "redirect:/User/processToCheckout";
+	}
 
 }

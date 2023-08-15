@@ -14,7 +14,9 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	public List<Product> findBycid(int cid);
 	
 	@Query("select SUM(prod_price*prod_quantity) from Product p where p.cid=:cid")
-	public long getProductionByCatId(@Param("cid") int i);
+	public Long getProductionByCatId(@Param("cid") int i);
+	
+
 	
 	@Query("select SUM(prod_price*prod_quantity) from Product ")
 	public long getProduction();

@@ -75,12 +75,12 @@ input, button, select, optgroup, textarea {
 
 
 
-<!--===================1.  My Profile modal Start for user ===================== -->
-<!--=================== My Profile modal Start for user ===================== -->
+<!--===================1.  My Profile modal Start for USER ===================== -->
+<!--===================2. My Profile modal Start for ADMIN ===================== -->
 <!--=================== My Profile modal Start for user ===================== -->
 
 
-	<!--=================== My Profile modal Start for user ===================== -->
+	<!--===================1. My Profile modal Start for user ===================== -->
 
 	<div th:fragment="myProfile" class="modal fade" id="UserProfile" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -185,8 +185,9 @@ input, button, select, optgroup, textarea {
 
 
 
-	<!-- Profile Modal-admin -->
-	<div class="modal fade" id="AdminProfile" tabindex="-1"
+<!--===================2. My Profile modal Start for Admin ===================== -->
+
+	<div th:fragment="AdminProfile" class="modal fade" id="AdminProfile" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -201,13 +202,16 @@ input, button, select, optgroup, textarea {
 						<section style="background-color: #eee;">
 
 							<div class="card mb-4">
-								<form action="edit_user?id=<%=rs.getInt("user_id")%>" method="post">
+								<form th:action="@{/Admin/updateAdmin}" th:object="${userInfo}" method="post">
 									<div>
 										<div class="card-body text-center" style="text-align: center;">
 											<img src="img/hero/icon.png" alt="avatar"
 												class="rounded-circle img-fluid" style="width: 150px;">
 										</div>
-
+										
+											<input type="hidden" name="id" th:value="${userInfo.id}" />
+							
+										
 
 										<table class="table table-user-information">
 											<tbody>
@@ -218,7 +222,7 @@ input, button, select, optgroup, textarea {
 													</strong></td>
 
 													<td class="text-primary">: <input type="text"
-														name="name" value="<%=rs.getString("user_name")%>" /></td>
+														name="user_name" th:value="${userInfo.user_name }" /></td>
 												</tr>
 												<tr>
 													<td><strong> <span
@@ -226,14 +230,14 @@ input, button, select, optgroup, textarea {
 															Contact Details
 													</strong></td>
 													<td class="text-primary">: <input type="text"
-														name="Mobile" value="<%=User_MoNo%>" /></td>
+														name="user_mobno" th:value="${userInfo.user_mobno}" /></td>
 												</tr>
 												<tr>
 													<td><strong> <span
 															class="glyphicon glyphicon-asterisk text-primary"></span>
 															Email Id
 													</strong></td>
-													<td class="text-primary">:<%=rs.getString("user_emailid")%>
+													<td class="text-primary" th:text="' : '+${userInfo.user_emailid}">
 												</tr>
 												<tr>
 													<td><strong> <span
@@ -241,18 +245,11 @@ input, button, select, optgroup, textarea {
 															Addresss
 													</strong></td>
 													<td class="text-primary">: <input type="text"
-														name="address" value="  <%=rs.getString("user_adderess")%>" /></td>
+														name="user_adderess" th:value="${userInfo.user_adderess }" /></td>
 												</tr>
 											</tbody>
 										</table>
-
-
-										<%
-										}
-										%>
-
-									</div>
-									<input type="hidden" value="Admin" name="page"> 
+													</div>
 									<div class="modal-footer">
 										<button  id='closeModal' type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 										<button type="submit" class="btn btn-primary" >Update </button>
@@ -268,7 +265,7 @@ input, button, select, optgroup, textarea {
 
 	</div>
 
-	<!-- My Profile end -->
+<!--=================== My Profile modal Start for user ===================== -->
 
 
 
@@ -277,7 +274,7 @@ input, button, select, optgroup, textarea {
 
 
 	<!-- Modal -->
-	<div class="modal fade" id="AddNewAddress" tabindex="-1"
+	<div th:fragment="addAddress" class="modal fade" id="AddNewAddress" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div style="padding: 20px" class="modal-content">
@@ -288,7 +285,7 @@ input, button, select, optgroup, textarea {
 				</div>
 				<div class="modal-body">
 					<form class="addressForm" id="validAddress" onsubmit="return validAddress()"
-						action="SaveAddress?user_id=<%=user_id%>" method="post">
+						th:action="saveAddress" th:object="${customer}" method="post">
 						<input type="hidden" name="_token"
 							value="7izNrBqYjX16Icbzz1Vn8FgvFZk2Gjn6Ty3VcVjT"> <input
 							type="hidden" value="website-checkout-shipping-address"
@@ -296,39 +293,39 @@ input, button, select, optgroup, textarea {
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
-									<label>Full Name</label> <input type="text" name="name"
+									<label>Full Name</label> <input type="text" name="c_name"
 										class="form-control" value="" required>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Contact</label> <input type="text" name="mobile" id="mobileno"
+									<label>Contact</label> <input type="text" name="c_mobno" id="mobileno"
 										class="form-control"
-										onkeypress="INGENIOUS.numericInput(event)" value="" required>
+										onkeypress="INGENIOUS.numericInput(event)"  required>
 										<small id="contact_error" style="color:red; margin-left:10px;" ></small>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Email</label> <input type="email" name="email"
+									<label>Email</label> <input type="email" name="c_email"
 										class="form-control" value="" required>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="form-group">
-									<textarea name="address" placeholder="Enter Your Address"
+									<textarea name="c_adderess" placeholder="Enter Your Address"
 										class="form-control" cols="30" rows="4" required></textarea>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Landmark</label> <input type="text" name="landmark"
+									<label>Landmark</label> <input type="text" name="c_landmark"
 										class="form-control" value="" required>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label>Address Type</label> <select name="addresstype"
+									<label>Address Type</label> <select name="c_AddressType"
 										class="form-control" required>
 										<option value="Home">Home</option>
 										<option value="Office">Office</option>
@@ -338,19 +335,20 @@ input, button, select, optgroup, textarea {
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label>City</label> <input type="text" name="city"
+									<label>City</label> <input type="text" name="c_city"
 										class="form-control" value="" required>
 								</div>
 							</div>
 
 							<div class="col-md-4">
 								<div class="form-group">
-									<label>Pincode</label> <input type="text" id="pincode" name="pincode"
+									<label>Pincode</label> <input type="text" id="pincode" name="c_pincode"
 										class="form-control"
 										onkeypress="INGENIOUS.numericInput(event)" value="" required>
 										<small id="pin_error" style="color:red; text-align:center;" ></small>
 								</div>
 							</div>
+							<input type="hidden" name="u_id" th:value="${userId}">
 
 						</div>
 						<div class="modal-footer">

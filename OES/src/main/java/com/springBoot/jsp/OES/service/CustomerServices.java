@@ -12,4 +12,6 @@ public interface CustomerServices {
 
 	List<Customer> getAllCustomerWithAddress(int id);
 
+	void insertCustomer(Customer customer);
+
 }

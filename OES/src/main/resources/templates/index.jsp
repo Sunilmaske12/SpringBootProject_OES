@@ -43,7 +43,7 @@
 	</div>
 	<header th:replace="~{/UserHeaderFooter/header::userHeader}"></header>
 	
-	<jsp:include page="CommonModal.jsp" />
+	
 	<div th:replace="~{/CommonModal::myProfile}"></div>
 	
 	

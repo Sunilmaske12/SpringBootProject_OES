@@ -24,6 +24,7 @@ import com.springBoot.jsp.OES.service.OrderServices;
 import com.springBoot.jsp.OES.service.UserServices;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
 import com.springBoot.jsp.OES.service.CustomerServices;
 import com.springBoot.jsp.OES.service.OrderDetailService;
 
@@ -123,12 +124,14 @@ public class OrderController {
 	
 	@GetMapping("/User/processToCheckout")
 	public String checkoutPage(Model model, @AuthenticationPrincipal CustomUserDetails user) {
-		int cartLength = (Integer.parseInt(request.getParameter("cartlegth")));
-		int totalAmount = (Integer.parseInt(request.getParameter("TotalAmount")));
+		
+		String cartLength = request.getParameter("cartlegth");
+		String totalAmount = request.getParameter("TotalAmount");
 		List<Customer> getAllAddress = customerServices.getAllCustomerWithAddress(user.getId());
-		model.addAttribute("cartLength", cartLength);
-		model.addAttribute("totalAmount", totalAmount);
+		if(cartLength!=null) model.addAttribute("cartLength", (Integer.parseInt(cartLength)));
+		if(cartLength!=null) model.addAttribute("totalAmount", (Integer.parseInt(totalAmount)));
 		model.addAttribute("AllAddress", getAllAddress);
+		model.addAttribute("customer", new Customer());
 		return "checkout";
 	}
 	

@@ -60,16 +60,22 @@ public class ProductServiceIml implements ProductService{
 
 	@Override
 	public float[] getCategoryWiseProductionPer() {
-		long[] allCatProduction=new long[4];
+		Long[] allCatProduction=new Long[4];
 			allCatProduction[0] =  theProductRepository.getProductionByCatId(12);
 			allCatProduction[1] =theProductRepository.getProductionByCatId(10);
 			allCatProduction[2] =theProductRepository.getProductionByCatId(15);
 			allCatProduction[3] =theProductRepository.getProduction();
 		float[] allCatPer=new float[4];
+		for(int i=0; i<=3; i++) {
+			if(allCatProduction[i]==null) {
+				allCatProduction[i]=(long) 0;
+			}
+		}
 		allCatPer[0] = (float) (((double)allCatProduction[0]/(double)allCatProduction[3])*100); //appliances
 		allCatPer[1] = (float) (((double)allCatProduction[1]/(double)allCatProduction[3])*100);//fan
 		allCatPer[2] = (float) (((double)allCatProduction[2]/(double)allCatProduction[3])*100);//tool
 		allCatPer[3] = 100 -allCatPer[0]-allCatPer[1]-allCatPer[2]; //other
+		
 		return allCatPer;
 	}
 
@@ -83,8 +89,12 @@ public class ProductServiceIml implements ProductService{
 	@Override
 	public List<Product> getRecentProducts() {
 		List<Product> p1= theProductRepository.findAll();
+		int size =4;
+		if(p1.size()<=4) {
+			size = p1.size();
+		}
 		List<Product> p2=new ArrayList<Product>();
-		for(int i=p1.size()-4; i<p1.size(); i++) {
+		for(int i=p1.size()-size; i<p1.size(); i++) {
 			p2.add(p1.get(i));
 		}
 		return p2;

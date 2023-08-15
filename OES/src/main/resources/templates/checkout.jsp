@@ -46,13 +46,11 @@
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-	<jsp:include page="header.jsp" />
-	<jsp:include page="CommonModal.jsp" />
-
-
-
-
-	<!-- Breadcrumb Section Begin -->
+	<header th:replace="~{/UserHeaderFooter/header::userHeader}"></header>
+	
+	<div th:replace="~{/CommonModal::addAddress}"></div>
+	
+<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-section set-bg" data-setbg="img/Name-bg.jpg">
 		<div class="container">
 			<div class="row">
