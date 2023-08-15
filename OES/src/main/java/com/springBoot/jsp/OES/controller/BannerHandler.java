@@ -54,6 +54,5 @@ public class BannerHandler {
 		bannerServices.deleteBanner(Bid);
 			return "redirect:/allBanner";
 	}
-	
-	
 }
+//sunil
