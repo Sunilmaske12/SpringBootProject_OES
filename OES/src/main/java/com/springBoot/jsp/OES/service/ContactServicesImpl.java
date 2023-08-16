@@ -50,4 +50,11 @@ public class ContactServicesImpl implements ContactServices {
 		
 	}
 
+	@Override
+	public ChatTicket getTicketById(int tid) {
+		return ticketRepository.findById(tid).get();
+	}
+
+	
+
 }

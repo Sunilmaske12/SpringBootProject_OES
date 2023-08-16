@@ -36,7 +36,7 @@
 	</div>
 
 
-		<header th:replace="/UserHeaderFooter/header::userHeader"></header>
+		<header th:replace="~{/UserHeaderFooter/header::userHeader}"></header>
 
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-section set-bg" data-setbg="img/Name-bg.jpg">
@@ -177,7 +177,7 @@
 	</div>
 	<!-- Contact Form End -->
 
-		<footer th:replace="/UserHeaderFooter/footer::userFooter"></footer>
+		<footer th:replace="~{/UserHeaderFooter/footer::userFooter}"></footer>
 
 	<!-- Js Plugins -->
 	<script src="js/jquery-3.3.1.min.js"></script>

@@ -84,7 +84,7 @@
 								<div class="input-group-append">
 									<span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
 								</div>
-								<textarea name="message"  class="form-control type_msg" placeholder="Type your message..."></textarea>
+								<textarea name="message"  class="form-control type_msg" placeholder="Type your message..." required></textarea>
 								<div class="input-group-append">
 									<button type="submit" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
 								</div>

@@ -11,11 +11,13 @@
 <meta name="keywords"
 	content="admin template, Apex admin template, dashboard template, flat admin template, responsive admin template, web app">
 <meta name="author" content="PIXINVENT">
-<title>Admin | Banner</title>
+<title>Admin | All-Products</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-touch-fullscreen" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
+<link rel="stylesheet" type="text/css"	href="app-assets/fonts/feather/style.min.css">
+
 </head>
 
 <body data-col="2-columns" class=" 2-columns ">

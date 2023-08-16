@@ -7,6 +7,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ import com.springBoot.jsp.OES.service.UserServices;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import com.springBoot.jsp.OES.service.ContactServices;
 import com.springBoot.jsp.OES.service.CustomerServices;
 import com.springBoot.jsp.OES.service.OrderDetailService;
 
@@ -45,6 +47,34 @@ public class OrderController {
 	
 	@Autowired
 	HttpServletRequest request;
+	
+	@Autowired
+	private ContactServices contactServices;
+	
+	@ModelAttribute
+	public void commonData(Model model, @AuthenticationPrincipal CustomUserDetails userDetail)
+	{
+		if(userDetail !=null) {
+			User adminInfo = userServices.getUserById(userDetail.getId());
+			int newUsers = userServices.getNewUserCount();
+			int newOrders = orderServices.getNewOrdersCount();
+			int newQuery = contactServices.getNewQueryCount();
+			int notificationCount = 0;
+					if(newUsers!=0) notificationCount+=1;
+					if(newOrders!=0) notificationCount+=1;
+					if(newQuery!=0) notificationCount+=1;
+
+			model.addAttribute("aminInfo", adminInfo);
+			model.addAttribute("userInfo", adminInfo);
+			model.addAttribute("userId", adminInfo.getId());
+			model.addAttribute("newUsers", newUsers);
+			model.addAttribute("newOrders", newOrders);
+			model.addAttribute("newQuery", newQuery);
+			model.addAttribute("notificationCount", notificationCount);
+		}
+		
+	}
+	
 	
 	@GetMapping("/User/MyOrders")
 	public String myMyOrders(Model model, @AuthenticationPrincipal CustomUserDetails userDetail) {
@@ -80,9 +110,7 @@ public class OrderController {
 	}
 	
 	@GetMapping("/Admin/viewOrderAdmin")
-	public String getAdminOrderPage(Model model, @AuthenticationPrincipal CustomUserDetails userDetail) {
-		User adminInfo = userServices.getUserById(userDetail.getId());
-		model.addAttribute("aminInfo", adminInfo);
+	public String getAdminOrderPage(Model model) {
 		List<Order> allOrders = orderServices.getAllOrder();
 		String[] customerName=new String[allOrders.size()];
 				int i=0;
@@ -136,7 +164,7 @@ public class OrderController {
 	}
 	
 	@PostMapping("/User/makeOrder,{amount},{cartLength}")
-	public String makeOrder(@PathVariable("amount") int amount,@PathVariable("cartLength") int cartLength, Model model, @AuthenticationPrincipal CustomUserDetails user) {
+	public String makeOrder(@PathVariable("amount") int amount,@PathVariable("cartLength") int cartLength, Model model) {
 		String address_id = request.getParameter("address_id");
 		int payment = amount*100;
 		
@@ -157,7 +185,6 @@ public class OrderController {
 		}
 		model.addAttribute("cartLength", cartLength);
 		model.addAttribute("address_id", address_id);
-		model.addAttribute("userId", user.getId() );
 		model.addAttribute("a",1);
 		return "orderPlace";
 	}

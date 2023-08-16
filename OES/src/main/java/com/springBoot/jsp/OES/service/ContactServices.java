@@ -19,4 +19,6 @@ public interface ContactServices {
 
 	void saveChats(Chat chat);
 
+	ChatTicket getTicketById(int tid);
+
 }

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.springBoot.jsp.OES.entity.Customer;
 import com.springBoot.jsp.OES.entity.User;
 import com.springBoot.jsp.OES.securityConfig.CustomUserDetails;
+import com.springBoot.jsp.OES.service.ContactServices;
 import com.springBoot.jsp.OES.service.CustomerServices;
+import com.springBoot.jsp.OES.service.OrderServices;
 import com.springBoot.jsp.OES.service.UserServices;
 
 @Controller
@@ -29,14 +31,45 @@ public class UserController {
 	@Autowired
 	private CustomerServices customerService;
 	
+
+	@Autowired
+	private OrderServices orderServices;
+	
+	@Autowired
+	private ContactServices contactServices;
+	
+	@ModelAttribute
+	public void commonData(Model model, @AuthenticationPrincipal CustomUserDetails userDetail)
+	{
+		if(userDetail !=null) {
+			User adminInfo = userServices.getUserById(userDetail.getId());
+			int newUsers = userServices.getNewUserCount();
+			int newOrders = orderServices.getNewOrdersCount();
+			int newQuery = contactServices.getNewQueryCount();
+			int notificationCount = 0;
+					if(newUsers!=0) notificationCount+=1;
+					if(newOrders!=0) notificationCount+=1;
+					if(newQuery!=0) notificationCount+=1;
+
+			model.addAttribute("aminInfo", adminInfo);
+			model.addAttribute("userInfo", adminInfo);
+			model.addAttribute("userId", adminInfo.getId());
+			model.addAttribute("newUsers", newUsers);
+			model.addAttribute("newOrders", newOrders);
+			model.addAttribute("newQuery", newQuery);
+			model.addAttribute("notificationCount", notificationCount);
+		}
+		
+	}
+	
+	
 	@GetMapping("/registrationForm")
 	public String myRegistrationForm(Model model) {
 		User u = new User();
 		model.addAttribute("User", u);
 		return "RegistrationForm";
 	}
-
-	
+		
 	  @PostMapping("/registerUser") 
 	  public String registerUser(@ModelAttribute("User") User user)
 	  {	
@@ -64,10 +97,8 @@ public class UserController {
 	  }
 	  
 	@GetMapping("/Admin/userList")
-	public String getAllUserPage(Model model, @AuthenticationPrincipal CustomUserDetails userDetail) {
-		User adminInfo = userServices.getUserById(userDetail.getId());
-		model.addAttribute("aminInfo", adminInfo);
-		List<User> allUser = userServices.getAllUsers();
+	public String getAllUserPage(Model model) {
+			List<User> allUser = userServices.getAllUsers();
 		model.addAttribute("userList", allUser);
 		return "UserList";
 	}

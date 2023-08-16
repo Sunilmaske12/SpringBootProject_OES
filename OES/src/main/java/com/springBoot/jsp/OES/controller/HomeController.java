@@ -60,9 +60,21 @@ public class HomeController {
 	{
 		if(userDetail !=null) {
 			User adminInfo = userServices.getUserById(userDetail.getId());
+			int newUsers = userServices.getNewUserCount();
+			int newOrders = orderServices.getNewOrdersCount();
+			int newQuery = contactServices.getNewQueryCount();
+			int notificationCount = 0;
+					if(newUsers!=0) notificationCount+=1;
+					if(newOrders!=0) notificationCount+=1;
+					if(newQuery!=0) notificationCount+=1;
+
 			model.addAttribute("aminInfo", adminInfo);
 			model.addAttribute("userInfo", adminInfo);
 			model.addAttribute("userId", adminInfo.getId());
+			model.addAttribute("newUsers", newUsers);
+			model.addAttribute("newOrders", newOrders);
+			model.addAttribute("newQuery", newQuery);
+			model.addAttribute("notificationCount", notificationCount);
 		}
 		
 	}
@@ -152,17 +164,10 @@ public class HomeController {
 	
 	@GetMapping("/Admin/adminPannel")
 	public String getDashboard(Model model, @AuthenticationPrincipal CustomUserDetails userDetail) {
-		User adminInfo = userServices.getUserById(userDetail.getId());
+	
 		int totalUsers = userServices.getTotalUserCount();
 		int totalOrders = orderServices.getTotalOrders();
 		int totalSales = orderServices.getTotalSell();
-		int newUsers = userServices.getNewUserCount();
-		int newOrders = orderServices.getNewOrdersCount();
-		int newQuery = contactServices.getNewQueryCount();
-		int notificationCount = 0;
-				if(newUsers!=0) notificationCount+=1;
-				if(newOrders!=0) notificationCount+=1;
-				if(newQuery!=0) notificationCount+=1;
 		int[] statusPer= orderServices.getPercentageStatus();
 		float[] categoryWiseProductionPer= productService.getCategoryWiseProductionPer();
 		int[] dailyOnlineSell = dailyBusinessServices.getDailyOnlineSell();
@@ -175,11 +180,6 @@ public class HomeController {
 		model.addAttribute("totalOrders", totalOrders);
 		model.addAttribute("totalSales", totalSales);
 		model.addAttribute("totalEarning", (int)(totalSales*0.20));
-		model.addAttribute("aminInfo", adminInfo);
-		model.addAttribute("newUsers", newUsers);
-		model.addAttribute("newOrders", newOrders);
-		model.addAttribute("newQuery", newQuery);
-		model.addAttribute("notificationCount", notificationCount);
 		model.addAttribute("statusPer", statusPer);
 		model.addAttribute("catWiseProductionPer", categoryWiseProductionPer);
 		model.addAttribute("totalProduction", totalProduction);

@@ -1,7 +1,8 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
+	
+	
 </head>
 <body data-col="2-columns" class=" 2-columns " th:fragment="Navbar">
 

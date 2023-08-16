@@ -17,6 +17,7 @@
 <meta name="apple-touch-fullscreen" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
+<link rel="stylesheet" type="text/css"	href="app-assets/fonts/feather/style.min.css">
 
 
 </head>
@@ -25,8 +26,8 @@
 
 	<div class="wrapper nav-collapsed menu-collapsed">
 
-		 <aside th:replace="/UserHeaderFooter/Asidebar::Asidebar"></aside> 
-	<nav th:replace="/UserHeaderFooter/Navbar::Navbar"></nav>
+		 <aside th:replace="~{/UserHeaderFooter/Asidebar::Asidebar}"></aside> 
+		<nav th:replace="~{/UserHeaderFooter/Navbar::Navbar}"></nav>
 		
 
 		<div class="main-panel">
@@ -68,7 +69,7 @@
 																class="btn btn-primary dropdown-toggle dropdown-toggle-split"
 																data-toggle="dropdown"></button>
 															<div class="dropdown-menu">
-																 <a	 class="dropdown-item"  th:href="@{'/updateTicketStatus'+','+'Close'+','+${tickets.ticketId }}">CLOSED</a>
+																 <a	 class="dropdown-item"  th:href="@{'/Admin/updateTicketStatus'+','+'Close'+','+${tickets.ticketId }}">CLOSED</a>
 															</div>
 														</div>
 													</td>
@@ -85,8 +86,8 @@
 																class="btn btn-primary dropdown-toggle dropdown-toggle-split"
 																data-toggle="dropdown"></button>
 															<div class="dropdown-menu">
-																<a  class="dropdown-item" th:href="@{'/updateTicketStatus'+','+'Open'+','+${tickets.ticketId }}">OPEN</a>
-																 <a	 class="dropdown-item" th:href="@{'/updateTicketStatus'+','+'Close'+','+${tickets.ticketId }}">CLOSED</a>
+																<a  class="dropdown-item" th:href="@{'/Admin/updateTicketStatus'+','+'Open'+','+${tickets.ticketId }}">OPEN</a>
+																 <a	 class="dropdown-item" th:href="@{'/Admin/updateTicketStatus'+','+'Close'+','+${tickets.ticketId }}">CLOSED</a>
 															</div>
 														</div>
 													</td>

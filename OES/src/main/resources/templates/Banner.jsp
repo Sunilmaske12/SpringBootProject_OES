@@ -16,6 +16,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <!-- all  CSS-->
 
+<link rel="stylesheet" type="text/css"	href="app-assets/fonts/feather/style.min.css">
+
 <!-- BEGIN APEX CSS-->
 <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
 </head>

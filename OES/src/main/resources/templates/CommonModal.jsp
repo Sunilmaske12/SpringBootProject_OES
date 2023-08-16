@@ -209,7 +209,7 @@ input, button, select, optgroup, textarea {
 												class="rounded-circle img-fluid" style="width: 150px;">
 										</div>
 										
-											<input type="hidden" name="id" th:value="${userInfo.id}" />
+											<input type="hidden" name="id" th:value="${userId}" />
 							
 										
 
