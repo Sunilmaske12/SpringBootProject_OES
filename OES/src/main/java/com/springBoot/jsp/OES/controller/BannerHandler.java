@@ -71,18 +71,16 @@ public class BannerHandler {
 			return "AddBanner";
 	}
 	
-	@GetMapping("/statusServlet,{action},{Bid}")
+	@GetMapping("/updateBannerStatus,{action},{Bid}")
 	public String updateBannerStatus(Model model, @PathVariable("action") String Action, @PathVariable("Bid") int Bid) {
-		//List<Banner> allBanner = bannerServices.getAllBanner();
 		bannerServices.updateStatus(Action, Bid);
-		//model.addAttribute("Banner", allBanner);
-		return "redirect:/allBanner";
+		return "redirect:allBanner";
 	}
 	
 	@GetMapping("/deleteBanner{Bid}")
 	public String deleteBanner(Model model,  @PathVariable("Bid") int Bid) {
 		bannerServices.deleteBanner(Bid);
-			return "redirect:/allBanner";
+			return "redirect:allBanner";
 	}
 }
 //sunil

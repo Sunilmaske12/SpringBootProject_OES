@@ -70,7 +70,7 @@
 																class="btn btn-success dropdown-toggle dropdown-toggle-split"
 																data-toggle="dropdown"></button>
 															<div class="dropdown-menu">
-																<a  class="dropdown-item" th:href="@{'/statusServlet'+','+inactive+','+${banner.Banner_no }}">In-Active</a>
+																<a  class="dropdown-item" th:href="@{'/Admin/updateBannerStatus'+','+inactive+','+${banner.Banner_no }}">In-Active</a>
 															</div>
 														</div>
 													
@@ -82,7 +82,7 @@
 																class="btn btn-danger dropdown-toggle dropdown-toggle-split"
 																data-toggle="dropdown"></button>
 															<div class="dropdown-menu">
-																<a  class="dropdown-item" th:href="@{'/statusServlet'+','+Active+','+${banner.Banner_no }}">Active</a>
+																<a  class="dropdown-item" th:href="@{'/Admin/updateBannerStatus'+','+Active+','+${banner.Banner_no }}">Active</a>
 															</div>
 														</div>
 													
@@ -91,7 +91,7 @@
 													
 													<td><a th:href="@{'/img/banner/'+${banner.Banner_image}}"><button type="button" class="btn btn-primary">View Image</button></a></td>
                                                    
-												 <td><a	th:href="@{'/deleteBanner'+${banner.Banner_no}}"><button type="button" class="btn btn-danger">Delete</button> </a></td>
+												 <td><a	th:href="@{'/Admin/deleteBanner'+${banner.Banner_no}}"><button type="button" class="btn btn-danger">Delete</button> </a></td>
 													
 												</tr>
 												
