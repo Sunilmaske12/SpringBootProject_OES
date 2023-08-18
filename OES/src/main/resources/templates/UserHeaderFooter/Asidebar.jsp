@@ -11,7 +11,7 @@
 			<div class="logo clearfix">
 				
 					<div class="logo-img">
-					<a th:href="@{/Admin/}" class="logo-text float-left">
+					<a th:href="@{/}" class="logo-text float-left">
 						<img src="app-assets/img/logo.png">
 					
 					<span class="text align-middle">shop</span>

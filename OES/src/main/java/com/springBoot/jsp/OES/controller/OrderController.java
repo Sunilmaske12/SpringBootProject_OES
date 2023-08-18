@@ -126,6 +126,7 @@ public class OrderController {
 	
 	@GetMapping("/orderDetailsAdmin{orderId},{addressId}")
 	public String getAdminOrderDetailsPage(Model model, @PathVariable("orderId") int oid, @PathVariable("addressId") int aid) {
+		orderServices.updateSeenOrder(oid);
 		List<OrderDetails> orderdetails = orderServices.getOrderDetailById(oid);
 		Customer getCustomer = customerServices.getCustomerById(aid);
 		int totalPrice = 0, charges=0;
@@ -237,6 +238,6 @@ public class OrderController {
 		
 		return "redirect:/User/MyOrders";
 	}
-	
+		
 
 }

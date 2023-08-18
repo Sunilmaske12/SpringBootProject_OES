@@ -33,7 +33,7 @@
 				<div class="content-wrapper">
 
 					<div class="mb-3">
-						<a th:href="@{/addBanner}"
+						<a th:href="@{/Admin/addBannerPage}"
 							class="btn btn-raised gradient-crystal-clear white"><i
 							class="fa fa-plus " aria-hidden="true"></i> Create New </a>
 					</div>
@@ -60,7 +60,7 @@
 												</thead>
 											
                         	        <tr th:each="banner,status :${Banner }" >
-											<td th:text="${status.index}"></td>
+											<td th:text="${status.index+1}"></td>
 													<td th:text="${banner.Banner_name }"></td>
 													<td  th:text="${banner.Date }"></td>
 													<td  >
@@ -89,7 +89,7 @@
 													
 													
 													
-													<td><a th:href="@{'/img/banner/'+${banner.Banner_image}}"><button type="button" class="btn btn-primary">View Image</button></a></td>
+													<td><a th:href="@{'/Admin/bannerDetails,'+${banner.Banner_no}}"><button type="button" class="btn btn-primary">View Banner</button></a></td>
                                                    
 												 <td><a	th:href="@{'/Admin/deleteBanner'+${banner.Banner_no}}"><button type="button" class="btn btn-danger">Delete</button> </a></td>
 													

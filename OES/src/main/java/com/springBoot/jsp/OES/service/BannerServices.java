@@ -12,4 +12,8 @@ public interface BannerServices {
 
 	void deleteBanner(int bid);
 
+	void saveBanner(Banner banner);
+
+	Banner getBannerById(int bid);
+
 }

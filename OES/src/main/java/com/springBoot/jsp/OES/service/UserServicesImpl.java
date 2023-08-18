@@ -48,4 +48,11 @@ public class UserServicesImpl implements UserServices {
 		return userRepository.countBySeen("no");
 	}
 
+	@Override
+	public void seenAllUsers() {
+		List<User> user=userRepository.findAllBySeen("No");
+		for(User u:user) u.setSeen("Yes");
+		userRepository.saveAll(user);
+	}
+
 }

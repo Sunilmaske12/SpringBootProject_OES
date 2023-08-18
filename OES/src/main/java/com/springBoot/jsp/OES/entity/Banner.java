@@ -54,6 +54,11 @@ public class Banner {
 	public void setBanner_image(String banner_image) {
 		Banner_image = banner_image;
 	}
+	@Override
+	public String toString() {
+		return "Banner [banner_no=" + banner_no + ", banner_name=" + banner_name + ", Date=" + Date + ", action="
+				+ action + ", Banner_image=" + Banner_image + "]";
+	}
 	
 	
 	

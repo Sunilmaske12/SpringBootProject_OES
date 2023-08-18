@@ -27,4 +27,6 @@ public interface OrderServices {
 
 	public void saveOrderDetails(OrderDetails orderdetail);
 
+	public void updateSeenOrder(int oid);
+
 }

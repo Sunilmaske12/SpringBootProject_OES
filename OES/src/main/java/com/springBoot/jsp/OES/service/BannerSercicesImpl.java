@@ -36,4 +36,16 @@ public class BannerSercicesImpl implements BannerServices {
 		bannerRepository.deleteById(Bid);;
 		}
 
+
+	@Override
+	public void saveBanner(Banner banner) {
+		bannerRepository.save(banner);		
+	}
+
+
+	@Override
+	public Banner getBannerById(int bid) {
+		return bannerRepository.findById(bid).get();
+	}
+
 }

@@ -9,7 +9,7 @@
 <meta name="keywords"
 	content="admin template, Apex admin template, dashboard template, flat admin template, responsive admin template, web app">
 <meta name="author" content="PIXINVENT">
-<title>OES Banner</title>
+<title>OES Banner-Detail</title>
 <link rel="apple-touch-icon" sizes="60x60"
 	href="app-assets/img/ico/apple-icon-60.html">
 <link rel="apple-touch-icon" sizes="76x76"
@@ -59,45 +59,38 @@
 			<div class="main-content">
 				<div class="content-wrapper">
 
-					<div class="mb-3">
-						<a th:href="@{/Admin/allBanner}"
-							class="btn btn-raised gradient-crystal-clear white"><i
-							class="fa fa-plus " aria-hidden="true"></i> View Banner list </a>
-					</div>
-
-					<section id="basic-form-layouts">
+							<section id="basic-form-layouts">
 						<div class="row justify-content-md-center">
 							<div class="col-md-6">
 								<div class="card">
-									<div style="border: 2px solid black; max-height: 70px;"
+									<div 
 										class="card-header">
-										<h4 class="card-title" id="basic-layout-card-center">Create
-											Banner</h4>
+										<h4 class="card-title" id="basic-layout-card-center">
+											Banner Detail</h4>
 									</div>
-									<div class="card-body m-4">
+									<div class="card-body m-2 ">
 										<div class="px-3">
 											<!-- form start -->
-											<form class="form" th:action="@{/Admin/saveBanner}" th:object="${banner}" method="post"
+											<form class="form" th:action="@{/Admin/updateBanner}" th:object="${banner}" method="post"
 												enctype="multipart/form-data">
 												<div class="form-body">
 													<div class="form-group">
 														<label for="eventRegInput1">Banner Name </label> <input
-															type="text" id="eventRegInput1" class="form-control"
+															type="text" id="eventRegInput1" class="form-control" th:value="banner.banner_name"
 															name="banner_name" />
 													</div>
 													<div class="form-group">
-													<label>Action </label>
-													 <select class="form-control"
-														name="action">
-
-														<option value="Active">Active</option>
-														<option value="In-Active">In-Active</option>
-
-													</select>
+													<label>Banner : </label>
 												</div>
+												
+													<div class="form-group text-center">
+														<img style="max-height:150px" th:src="@{'/img/banner/'+${banner.Banner_image}}" />
+													</div>
+												
+												
 													<div class="form-group">
-														<label>Select Banner Image </label> <input type="file"
-															class="form-control" name="image" />
+														<label>Select New Image </label> <input type="file" 
+															class="form-control" name="image" required/>
 													</div>
 													
 												</div>
@@ -105,18 +98,9 @@
 											<div class="form-actions center">
 
 													<button type="submit" class="btn btn-raised btn-primary">
-														Upload</button>
+														Change</button>
 												</div>
 
-												<div>
-													<h6>1. Upload File Size Not More than 2 MB.</h6>
-
-													<h6>2. File Upload Before Getting Smaller Size From
-														Tinypng.com</h6>
-
-													<h6 style="color: red;">3. For Responsive slider
-														upload image size in 2560*1436 pixels</h6>
-												</div>
 											</form>
 										</div>
 									</div>

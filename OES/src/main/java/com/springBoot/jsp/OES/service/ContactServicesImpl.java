@@ -55,6 +55,13 @@ public class ContactServicesImpl implements ContactServices {
 		return ticketRepository.findById(tid).get();
 	}
 
+	@Override
+	public void updateTicketsSeen(int tid) {
+		ChatTicket ticket= ticketRepository.findById(tid).get();
+		ticket.setSeen("Yes");
+		ticketRepository.save(ticket);
+	}
+
 	
 
 }

@@ -132,6 +132,7 @@ public class ContactHandler {
 	@GetMapping("/Admin/allMyChats,{ticketId}")
 	public String getMyChatsAdmin(@PathVariable("ticketId") int tid, Model m ) {
 		List<Chat> allChats = contactServices.getAllChatsById(String.valueOf(tid));
+		contactServices.updateTicketsSeen(tid);
 		//m.addAttribute("status", status);
 		m.addAttribute("chats", allChats);
 		return "AdminChat";
@@ -144,5 +145,5 @@ public class ContactHandler {
 		contactServices.saveTicket(ticket);
 		return "redirect:/Admin/support";
 	}
-
+	
 }

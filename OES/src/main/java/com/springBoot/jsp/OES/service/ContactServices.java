@@ -21,4 +21,6 @@ public interface ContactServices {
 
 	ChatTicket getTicketById(int tid);
 
+	void updateTicketsSeen(int tid);
+
 }

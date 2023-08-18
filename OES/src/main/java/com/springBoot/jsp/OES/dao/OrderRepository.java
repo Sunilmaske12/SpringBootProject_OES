@@ -18,7 +18,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	
 	@Query("select Status from Order o")
 	String[] getAllStatus();
-
+	
+	
 	
 
 }

@@ -114,4 +114,12 @@ public class OrderServicesImpl implements OrderServices {
 		orderDetailsRepository.save(orderdetail);		
 	}
 
+	
+	@Override
+	public void updateSeenOrder(int oid) {
+		Order order = orderRepository.findById(oid).get();
+		order.setSeen("Yes");
+		orderRepository.save(order);
+	}
+
 }

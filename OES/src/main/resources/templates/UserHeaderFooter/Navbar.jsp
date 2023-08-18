@@ -51,21 +51,21 @@
 							data-toggle="dropdown"
 							class="nav-link position-relative dropdown-toggle"><i
 								class="ft-bell font-medium-3 blue-grey darken-4"></i><span
-								class="notification badge badge-pill badge-danger" th:text="${notificationCount }"></span>
+								class="notification badge badge-pill badge-danger" th:if="${notificationCount>0}" th:text="${notificationCount }"></span>
 						</a>
 							<div
 								class="notification-dropdown dropdown-menu dropdown-menu-right">
 								<div class="noti-list">
-									<a href="ViewOrderAdmin.jsp"
+									<a th:href="@{/Admin/viewOrderAdmin}"
 										class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4"><i
 										class="ft-bell info float-left d-block font-large-1 mt-1 mr-2"></i><span
 										class="noti-wrapper"><span
 											class="noti-title line-height-1 d-block text-bold-400 info">
-												<span th:if="${newOrders!=0 }" style="color: #8B0000; font-size: 150%;" th:text="${newOrders }"></span>
-												<span th:unless="${newOrders!=0 }" style="color: #8B0000; font-size: 150%;" >No Any</span>
+												<span  th:if="${newOrders!=0 }" style="color: #8B0000; font-size: 150%;" th:text="${newOrders }"></span>
+												<span th:unless="${newOrders!=0 }" style="color: #8B0000;" >No Any</span>
 												 New Order Received
-										</span><span class="noti-text"> Click Here, To See All New
-												Orders.</span></span> </a> <a href="UserList.jsp"
+										</span><span  class="noti-text"> Click Here, To See All
+												Orders.</span></span> </a> <a th:href="@{/Admin/seenAllUsers}"
 										class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4"><i
 										class="ft-bell warning float-left d-block font-large-1 mt-1 mr-2"></i><span
 										class="noti-wrapper">
@@ -76,8 +76,8 @@
  														<span th:unless="${newUsers!=0 }">	No Any </span>
 													 New User Registered
 										</span>
-										<span class="noti-text"> Click Here, To See All New
-												User.</span></span></a> <a href="@{/Support}"
+										<span class="noti-text"> Click Here, To See All
+												User.</span></span></a> <a th:href="@{/Admin/support}"
 										class="dropdown-item noti-container py-3 border-bottom border-bottom-blue-grey border-bottom-lighten-4"><i
 										class="ft-bell danger float-left d-block font-large-1 mt-1 mr-2"></i><span
 										class="noti-wrapper"><span
@@ -86,7 +86,7 @@
 												style="color: #8B0000; font-size: 150%;" th:text="${newQuery }"></span>
 												<span th:if="${newQuery==0 }">	No Any</span>
 												 New Query Received
-										</span><span class="noti-text"> Click Here, To See All New
+										</span><span class="noti-text"> Click Here, To See All 
 												Query.</span></span></a>
 
 								</div>

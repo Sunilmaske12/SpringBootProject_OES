@@ -118,5 +118,12 @@ public class UserController {
 		customerService.insertCustomer(customer);
 		return "redirect:/User/processToCheckout";
 	}
+	
+	@GetMapping("/Admin/seenAllUsers")
+	public String seenAllUsers()
+	{
+		userServices.seenAllUsers();
+		return "redirect:/Admin/userList";
+	}
 
 }

@@ -173,8 +173,6 @@ public class HomeController {
 		int[] dailyOnlineSell = dailyBusinessServices.getDailyOnlineSell();
 		int[] dailyCashOnDeliverySell = dailyBusinessServices.getDailyCashOnDeliverySell();
 		Date[] dates = dailyBusinessServices.getDates();
-		
-		
 		String totalProduction = productService.getTotalProduction();
 		model.addAttribute("totalUsers", totalUsers);
 		model.addAttribute("totalOrders", totalOrders);

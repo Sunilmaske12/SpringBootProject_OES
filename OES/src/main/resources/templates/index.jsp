@@ -115,11 +115,9 @@
 							<button type="button" data-bs-target="#carouselExampleIndicators"
 								data-bs-slide-to="0" class="active" aria-current="true"
 								aria-label="Slide 1"></button>
-						<!-- 	<div th:each="banner,status :${allBanner}"
-							></div>
-						 -->	<button th:each="banner,status :${allBanner}"
+						<button th:each="banner,status :${allBanner}"
 							type="button" data-bs-target="#carouselExampleIndicators"
-								th:data-bs-slide-to="${status.index}" th:aria-label="' Slide'+ ${status.index+1}"></button>
+								th:data-bs-slide-to="${status.index+1}" th:aria-label="' Slide'+ ${status.index+2}"></button>
 								
 						</div>
 						<div class="carousel-inner">
@@ -140,8 +138,10 @@
 							th:each="banner:${allBanner}"
 							 th:if="${banner.Action == 'Active' }"
 							>
-								<img th:src="@{'img/banner/'+${banner.Banner_image}}"
+							
+								<img th:src="@{'/img/banner/'+${banner.Banner_image}}"
 									class="d-block w-100" alt="...">
+									
 							</div>
 							
 						</div>

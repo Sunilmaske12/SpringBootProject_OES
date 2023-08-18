@@ -18,4 +18,6 @@ public interface UserServices {
 
 	public int getNewUserCount();
 
+	public void seenAllUsers();
+
 }

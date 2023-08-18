@@ -1,5 +1,7 @@
 package com.springBoot.jsp.OES.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,5 +17,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 //	public int getNewUserCount();
 
 	public int countBySeen(String string);
+
+	public List<User> findAllBySeen(String string);
 
 }

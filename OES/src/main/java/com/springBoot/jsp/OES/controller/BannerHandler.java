@@ -1,15 +1,26 @@
 package com.springBoot.jsp.OES.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.springBoot.jsp.OES.entity.Banner;
 import com.springBoot.jsp.OES.entity.User;
@@ -18,6 +29,8 @@ import com.springBoot.jsp.OES.service.BannerServices;
 import com.springBoot.jsp.OES.service.ContactServices;
 import com.springBoot.jsp.OES.service.OrderServices;
 import com.springBoot.jsp.OES.service.UserServices;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/Admin")
@@ -66,9 +79,35 @@ public class BannerHandler {
 		return "Banner";
 	}
 	
-	@GetMapping("/addBanner")
+	@GetMapping("/addBannerPage")
 	public String addBanner(Model model) {
+		model.addAttribute("banner", new Banner());
 			return "AddBanner";
+	}
+	
+	@PostMapping("/saveBanner")
+	public String saveBanner(@ModelAttribute Banner banner, @RequestParam("image") MultipartFile file) {
+		
+		
+		if(file==null) {
+			return "redirect:addBannerPage";
+		}
+		else {
+			try {
+				InputStream is=file.getInputStream();
+				File saveFile = new ClassPathResource("./static/img/banner").getFile();
+				Path path = Paths.get(saveFile.getAbsolutePath()+File.separator+file.getOriginalFilename());
+				Files.copy(is, path, StandardCopyOption.REPLACE_EXISTING);
+					} catch (IOException e) {
+				e.printStackTrace();
+					}
+			
+			banner.setBanner_image(file.getOriginalFilename());
+			bannerServices.saveBanner(banner);
+			
+				return "redirect:allBanner";
+		}
+		
 	}
 	
 	@GetMapping("/updateBannerStatus,{action},{Bid}")
@@ -82,5 +121,33 @@ public class BannerHandler {
 		bannerServices.deleteBanner(Bid);
 			return "redirect:allBanner";
 	}
+	
+	@GetMapping("/bannerDetails,{bid}")
+	public String bannerDetails(@PathVariable("bid") int Bid, Model model)
+	{
+		Banner banner= bannerServices.getBannerById(Bid);
+		model.addAttribute("banner", banner);
+		return "ViewBannerDetail";
+	}
+	
+	@PostMapping("/updateBanner")
+	public String updateBanner(@ModelAttribute Banner banner, @RequestParam("image") MultipartFile file) {
+
+			try {
+				InputStream is=file.getInputStream();
+				File saveFile = new ClassPathResource("./static/img/banner").getFile();
+				Path path = Paths.get(saveFile.getAbsolutePath()+File.separator+file.getOriginalFilename());
+				Files.copy(is, path, StandardCopyOption.REPLACE_EXISTING);
+					} catch (IOException e) {
+				e.printStackTrace();
+					}
+			
+			banner.setBanner_image(file.getOriginalFilename());
+			bannerServices.saveBanner(banner);
+			
+				return "redirect:bannerDetails,"+banner.getBanner_no();
+	}
+	
+	
 }
 //sunil
