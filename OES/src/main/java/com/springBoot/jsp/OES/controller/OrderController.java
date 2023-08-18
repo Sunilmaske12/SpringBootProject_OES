@@ -25,10 +25,8 @@ import com.springBoot.jsp.OES.service.OrderServices;
 import com.springBoot.jsp.OES.service.UserServices;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
 import com.springBoot.jsp.OES.service.ContactServices;
 import com.springBoot.jsp.OES.service.CustomerServices;
-import com.springBoot.jsp.OES.service.OrderDetailService;
 
 @Controller
 public class OrderController {
@@ -36,8 +34,6 @@ public class OrderController {
 	@Autowired
 	private OrderServices orderServices;
 	
-	@Autowired
-	private OrderDetailService orderDetailService;
 	
 	@Autowired
 	private CustomerServices customerServices;
@@ -233,10 +229,29 @@ public class OrderController {
 			 orderdetail.setProduct_Name(pname[i]);
 			 orderdetail.setProduct_Price(String.valueOf(pprice[i]));
 			 orderdetail.setProduct_Quantity(String.valueOf(pquantity[i]));
-			 OrderDetails od= orderDetailService.savaProductDetails(orderdetail);
+			 OrderDetails od= orderServices.savaProductDetails(orderdetail);
 		 }
 		
 		return "redirect:/User/MyOrders";
+	}
+	
+	@GetMapping("/showInvoicePage/{oid},{aid}")
+	public String getInvoicePage(@PathVariable("oid") int oid, @PathVariable("aid") int aid, Model model) {
+		Customer customer = customerServices.getCustomerById(aid);
+		List<OrderDetails> orderDetails= orderServices.getOrderDetailById(oid);
+		int totalPrice = 0, charges=0;
+		for(OrderDetails od:orderDetails) {
+			totalPrice += (Integer.parseInt(od.getProduct_Price())*Integer.parseInt(od.getProduct_Quantity()));
+		}
+		if(totalPrice<=999) {
+			charges = 100; 
+		}
+	
+		model.addAttribute("charges", charges);
+		model.addAttribute("tPrice", totalPrice);
+		model.addAttribute("customer", customer);
+		model.addAttribute("orderDetails", orderDetails);
+		return "Invoice";
 	}
 		
 

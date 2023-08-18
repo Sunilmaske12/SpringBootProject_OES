@@ -34,7 +34,7 @@
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-		<header th:replace="/UserHeaderFooter/header::userHeader" ></header>
+		<header th:replace="~{/UserHeaderFooter/header::userHeader}" ></header>
 
 
 	<!-- Breadcrumb Section Begin -->

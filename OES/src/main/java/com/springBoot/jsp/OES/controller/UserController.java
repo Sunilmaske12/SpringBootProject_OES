@@ -19,6 +19,8 @@ import com.springBoot.jsp.OES.service.CustomerServices;
 import com.springBoot.jsp.OES.service.OrderServices;
 import com.springBoot.jsp.OES.service.UserServices;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class UserController {
 	
@@ -39,7 +41,7 @@ public class UserController {
 	private ContactServices contactServices;
 	
 	@ModelAttribute
-	public void commonData(Model model, @AuthenticationPrincipal CustomUserDetails userDetail)
+	public void commonData(Model model, @AuthenticationPrincipal CustomUserDetails userDetail, HttpSession session)
 	{
 		if(userDetail !=null) {
 			User adminInfo = userServices.getUserById(userDetail.getId());
@@ -57,6 +59,7 @@ public class UserController {
 			model.addAttribute("newUsers", newUsers);
 			model.addAttribute("newOrders", newOrders);
 			model.addAttribute("newQuery", newQuery);
+			session.setAttribute("userInfo", adminInfo);
 			model.addAttribute("notificationCount", notificationCount);
 		}
 		
@@ -82,11 +85,6 @@ public class UserController {
 	  @GetMapping("/customLogin")
 	  public String getCustomLoginForm() {
 		  return "loginform";
-	  }
-	  
-	  @PostMapping("/loginUser")
-	  public String loginUser() {
-		  return null;
 	  }
 	  
 	  @PostMapping("/User/editUser")

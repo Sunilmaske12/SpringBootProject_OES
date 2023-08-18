@@ -36,18 +36,6 @@
 </head>
 
 
-<!-- 
-<%
-HttpSession session4 = request.getSession();
-int userId = (int) session4.getAttribute("userid");
-MyOrderDao mod = new MyOrderDao();
-List<Order> orderlist = mod.getAllOrderListByUID(userId);
-String orderSuccess = (String) session4.getAttribute("orderSuccess");
-
-%> -->
-
-
-
 
 <body> <!-- <%if(orderSuccess!=null){%>
   onload="orderPlacePopUp()"
@@ -56,10 +44,8 @@ String orderSuccess = (String) session4.getAttribute("orderSuccess");
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-	<header th:replace="/UserHeaderFooter/header::userHeader"></header>
-	<jsp:include page="CommonModal.jsp" />
-
-
+	<header th:replace="~{/UserHeaderFooter/header::userHeader}"></header>
+	
 
 	<!-- Breadcrumb Section Begin -->
 	<section class="breadcrumb-section set-bg" data-setbg="img/Name-bg.jpg">
@@ -118,15 +104,8 @@ String orderSuccess = (String) session4.getAttribute("orderSuccess");
 															
 														</div>
 													</td>
-													   
-										<!-- 		   <% } %>
-						 -->
-						
-						
 						<td><a th:href="@{'/User/OrderDetails'+ ${allOrders.order_Id} +','+${allOrders.address_Id } }" type="button" style="color:white;" class="btn btn-primary btn-sm">DEATAILS</a></td>
-						<td><a href="Invoice.jsp?orderId=<%=order.getOrderId()%>&addressId=<%=order.getAddressId() %>" type="button"  class="btn btn-danger btn-sm">DOWNLOAD</a></td>
-				<!-- 	<%} %>
-				 -->	
+						<td><a th:href="@{'/showInvoicePage/'+${allOrders.order_Id}+','+${allOrders.address_Id}}" type="button"  class="btn btn-danger btn-sm">DOWNLOAD</a></td>
 					</tr>
 					
 				</tbody>
@@ -136,7 +115,7 @@ String orderSuccess = (String) session4.getAttribute("orderSuccess");
 	</section>
 	<!-- Checkout Section End -->
 
-		<footer th:replace="/UserHeaderFooter/footer::userFooter"></footer>
+		<footer th:replace="~{/UserHeaderFooter/footer::userFooter}"></footer>
 
 	<!-- Js Plugins -->
 	<script src="js/jquery-3.3.1.min.js"></script>

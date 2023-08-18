@@ -1,48 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Invoice</title>
 
-<%@page import="com.codeo.shop.Dao.MyOrderDao"%>
-<%@page import="com.codeo.shop.entity.Order"%>
-<%@page import="com.codeo.shop.entity.Customer"%>
-<%@page import="java.util.List"%>
-<%@page import="java.sql.Date"%>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-	crossorigin="anonymous">
+	rel="stylesheet">
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-	crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"
-	integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
-	crossorigin="anonymous"></script>
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 
 <link
 	href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
 	rel="stylesheet">
 </head>
+
 <body id="invoiceDownload">
 
+<script type="text/javascript">
+//========================Download Invoice===============
+function downloadInvoice() {
+	  console.log("Invoive download working")
+          html2canvas($('#invoiceDownload')[0], {
+              onrendered: function (canvas) {
+                  var data = canvas.toDataURL();
+                  var docDefinition = {
+                      content: [{
+                          image: data,
+                          width: 500
+                      }]
+                  };
+                  pdfMake.createPdf(docDefinition).download("invoice.pdf");
+              }
+          });
+      }
+      
 
-<%
-	String orderId=request.getParameter("orderId");
-	String addressId=request.getParameter("addressId");
-	
-	MyOrderDao mod = new MyOrderDao();
-	List<Customer> addressDetail = mod.getAddressDetailByID(addressId);
-	List<Order> orderDetail = mod.getOrderDetails(orderId);
-	%>
+</script>
+
 	<div  style="margin-left: 15%; margin-right:15%; top:20px;" class="card">
 		<div  class="card-body">
 			<div class="container mb-5 mt-3">
@@ -68,15 +68,15 @@
 
 
 					<div class="row">
-						<div class="col-xl-8">
-						<%for (Customer c : addressDetail) {%>
-							<ul class="list-unstyled">
-								<li class="text-muted">To: <span style="color: #5d9fc5;"> <%=c.getC_name() %></span></li>
-								<li class="text-muted"><%=c.getC_landmark() %></li>
-								<li class="text-muted"><%=c.getC_city() %>, Maharashtra</li>
-								<li class="text-muted"><i class="fas fa-phone"></i><%=c.getC_mobno() %></li>
-								<li class="text-muted"><i class="fas fa-phone"></i><%=c.getC_email() %></li>
-							</ul><%} %>
+						<div  class="col-xl-8">
+				
+							<ul th:object="${customer}" class="list-unstyled">
+								<li class="text-muted">To: <span style="color: #5d9fc5;" th:text="${customer.c_name }"> </span></li>
+								<li class="text-muted" th:text="${customer.c_landmark }"></li>
+								<li class="text-muted" th:text="${customer.c_city }+', Maharashtra'"></li>
+								<li class="text-muted" th:text="${customer.c_mobno }"><i class="fas fa-phone"></i></li>
+								<li class="text-muted" th:text="${customer.c_email }"><i class="fas fa-phone"></i></li>
+							</ul>
 						</div>
 						
 						<div class="col-xl-4">
@@ -100,31 +100,22 @@
 								<tr>
 									<th scope="col">#</th>
 									<th scope="col">Description</th>
-									<th scope="col">Qty</th>
 									<th scope="col">Unit Price</th>
+									<th scope="col">Quantity</th>
 									<th scope="col">Amount</th>
 								</tr>
 							</thead>
 							<tbody>
-							<%
-					int T_Price=0;
-					int charges=0;
-					for(Order order:orderDetail){%>
-								<tr>
+			
+					<tr th:each="orderDetails, status:${orderDetails}">
 						<td scope="row"></td>
-						<td><%=order.getProductName() %></td>
-						<td><%= order.getProductPrice()%></td>
-						<td><%= order.getProductQuantity() %></td>
-						<%int price=order.getProductPrice()*order.getProductQuantity();
-						 T_Price=T_Price+price;%>
-						<td><%= price%></td>
+						<td th:text="${orderDetails.Product_Name }"></td>
+						<td th:text="${orderDetails.Product_Price }"></td>
+						<td th:text="${orderDetails.Product_Quantity }"></td>
+						<td th:text="${tPrice }"></td>
 						
 					</tr>
-					<%}if(T_Price<999){
-						charges=100;
-					}
-					%>
-							</tbody>
+				</tbody>
 
 						</table>
 					</div>
@@ -135,13 +126,13 @@
 						</div>
 						<div class="col-xl-3">
 							<ul class="list-unstyled">
-								<li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>Rs. <%= T_Price %></li>
-								<li class="text-muted ms-3 mt-2"><span
-									class="text-black me-4">Charges </span>Rs. <%=charges %></li>
+								<li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span><span th:text="'Rs. ' +${tPrice }"></span></li>
+								<li class="text-muted ms-3 mt-2"><span 
+									class="text-black me-4">Charges </span><span th:text="'Rs. ' +${charges }"></span></li>
 							</ul>
 							<p class="text-black float-start">
-								<span class="text-black me-3"> Total Amount</span><span
-									style="font-size: 25px;">Rs. <%= T_Price+charges %></span>
+								<span class="text-black me-3"> Total Amount</span>
+								<span style="font-size: 25px;" th:text="'Rs.'+${tPrice + charges}"></span>
 							</p>
 						</div>
 					</div>

@@ -382,22 +382,7 @@ function msgErrorPopUp(){
 	}
 
 	
-//========================Download Invoice===============
-  function downloadInvoice() {
-            html2canvas($('#invoiceDownload')[0], {
-                onrendered: function (canvas) {
-                    var data = canvas.toDataURL();
-                    var docDefinition = {
-                        content: [{
-                            image: data,
-                            width: 500
-                        }]
-                    };
-                    pdfMake.createPdf(docDefinition).download("invoice.pdf");
-                }
-            });
-        }
-        
+       
  //====================== Logout Warning ===============================
  function logoutWarning(){
 	swal({

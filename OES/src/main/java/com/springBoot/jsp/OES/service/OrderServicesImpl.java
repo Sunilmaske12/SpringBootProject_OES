@@ -121,5 +121,12 @@ public class OrderServicesImpl implements OrderServices {
 		order.setSeen("Yes");
 		orderRepository.save(order);
 	}
+	
+	@Override
+	public OrderDetails savaProductDetails(OrderDetails orderdetail) {
+		return orderDetailsRepository.save(orderdetail);
+		
+	}
+
 
 }
