@@ -109,7 +109,7 @@
 											<span th:text="${address.c_adderess }"></span>
 											, <br>
 											<span th:text="${address.c_landmark }+' '+${address.c_city }+' '+${address.c_pincode }"></span>
-										<a th:href="@{'/editAddress'+${address.c_id }}"
+										<a th:href="@{'/User/editAddressPage'+${address.c_id }}"
 												class="badge bg-danger pull-right">Edit</a>
 												<hr size="12" width="100%" color="red">
 									</div>

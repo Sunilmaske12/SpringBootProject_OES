@@ -81,13 +81,6 @@
 										<small class="error" id="re_pass_error"></small>
 								</div>
 
-								<!-- <div class="form-group">
-									<input type="checkbox" name="agree-term" id="agree-term"
-										class="agree-term" /> <label for="agree-term"
-										class="label-agree-term"><span><span></span></span>I agree all statements in <a href="#" class="term-service">Terms
-											of service</a></label>
-
-								</div> -->
 								<div class="form-group form-button">
 									<a><input type="submit"  name="signup" id="signup"
 										class="form-submit" value="Register" /></a>

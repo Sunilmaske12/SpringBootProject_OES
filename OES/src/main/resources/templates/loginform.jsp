@@ -74,7 +74,7 @@
 								<input type="hidden" name="user_type" value="Normal_User">
 								
 								<div class="form-group">
-									<a href="forgotPassword.jsp" class="signup-image-link"><b>
+									<a th:href="@{/forgetPasswordPage}" class="signup-image-link"><b>
 											Forgot Password</b></a>
 								</div>
 

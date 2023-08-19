@@ -1,6 +1,8 @@
 package com.springBoot.jsp.OES.controller;
 
 import java.util.List;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,9 +18,11 @@ import com.springBoot.jsp.OES.entity.User;
 import com.springBoot.jsp.OES.securityConfig.CustomUserDetails;
 import com.springBoot.jsp.OES.service.ContactServices;
 import com.springBoot.jsp.OES.service.CustomerServices;
+import com.springBoot.jsp.OES.service.GmailSenderService;
 import com.springBoot.jsp.OES.service.OrderServices;
 import com.springBoot.jsp.OES.service.UserServices;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -39,6 +43,15 @@ public class UserController {
 	
 	@Autowired
 	private ContactServices contactServices;
+	
+	@Autowired
+	private  GmailSenderService gmailSenderService;
+	
+	@Autowired
+	private HttpServletRequest request;
+	
+	@Autowired
+	private HttpSession httpSession;
 	
 	@ModelAttribute
 	public void commonData(Model model, @AuthenticationPrincipal CustomUserDetails userDetail, HttpSession session)
@@ -77,8 +90,12 @@ public class UserController {
 	  public String registerUser(@ModelAttribute("User") User user)
 	  {	
 			user.setUser_pass(passwordEncoder.encode(user.getUser_pass()));
-
-		  userServices.saveUser(user); 
+		  User myUser=userServices.registerUser(user); 
+		  if(myUser!=null) {
+			  String message = "You have successfully register in Online Electrical Shopee ";
+			  gmailSenderService.sendMail(myUser.getUser_emailid(), "sunilmaske2001@gmail.com",myUser.getUser_name()
+					  , message);
+		  }
 	  return  "loginform";
 	  }
 	  
@@ -111,17 +128,62 @@ public class UserController {
 	}
 	
 	@PostMapping("/User/saveAddress")
-	public String saveAdress(@ModelAttribute Customer customer)
+	public String saveAdress(@ModelAttribute("customer") Customer customer)
 	{
 		customerService.insertCustomer(customer);
 		return "redirect:/User/processToCheckout";
 	}
 	
+	@GetMapping("User/editAddressPage{id}")
+	public String editAddressPage(Model model, @PathVariable("id") int aid)
+	{
+		Customer customer = customerService.getCustomerById(aid);
+		model.addAttribute("customer", customer);
+		return "EditAddress";
+	}
+		
 	@GetMapping("/Admin/seenAllUsers")
 	public String seenAllUsers()
 	{
 		userServices.seenAllUsers();
 		return "redirect:/Admin/userList";
+	}
+	
+	@GetMapping("/forgetPasswordPage")
+	public String forgetPasswordPage() {
+		return "forgotPassword";
+	}
+	
+	@PostMapping("/forgetPassword")
+	public String forgetPassword() {
+		String email = request.getParameter("email");
+		User user = userServices.getUserByEmail(email);
+		if(user==null) {
+			httpSession.setAttribute("errorMessage", "This is not a registered email");
+			return "forgotPassword";
+		}
+		else {
+			Random rad=new Random();
+			int otpValue = rad.nextInt(999999);
+			httpSession.setAttribute("otpValue", String.valueOf(otpValue));
+			String text = "Your otp is " +otpValue;
+			gmailSenderService.sendMail(email, "sunilmaske2001@gmail.com", "OES-OTP", text);
+			return "EnterOtp";
+		}
+		
+	}
+	
+	@PostMapping("/validateOtp")
+	public String validateOtp(){
+		String userOtp = request.getParameter("otp");
+		String realOtp = (String)httpSession.getAttribute("otpValue");
+		if(!userOtp.equals(realOtp)) {
+			return "EnterOtp";
+		}
+		else {
+			httpSession.removeAttribute("otpValue");
+			return "newPassword";
+		}
 	}
 
 }

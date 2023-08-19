@@ -77,7 +77,7 @@ input, button, select, optgroup, textarea {
 
 <!--===================1.  My Profile modal Start for USER ===================== -->
 <!--===================2. My Profile modal Start for ADMIN ===================== -->
-<!--=================== My Profile modal Start for user ===================== -->
+<!--===================3 Add address modal Start for user ===================== -->
 
 
 	<!--===================1. My Profile modal Start for user ===================== -->
@@ -265,12 +265,12 @@ input, button, select, optgroup, textarea {
 
 	</div>
 
-<!--=================== My Profile modal Start for user ===================== -->
+<!--=================== My Profile modal END for ADMIN ===================== -->
 
 
 
 
-	<!-- Set address during making orders modal start -->
+<!--=================== 3. Add address modal Start for user ===================== -->
 
 
 	<!-- Modal -->

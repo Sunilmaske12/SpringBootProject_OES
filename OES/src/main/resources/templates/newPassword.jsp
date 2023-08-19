@@ -45,7 +45,7 @@
 								<!-- User Name Input -->
 								<div class="form-group row justify-content-center px-3">
 									<div class="col-9 px-0">
-										<input type="text" name="password" placeholder="&#xf084; &nbsp; New Password"
+										<input type="password" name="password" placeholder="&#xf084; &nbsp; New Password"
 											class="form-control border-info placeicon">
 									</div>
 								</div>

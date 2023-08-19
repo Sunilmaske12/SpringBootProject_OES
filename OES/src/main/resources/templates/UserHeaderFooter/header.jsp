@@ -29,11 +29,11 @@
 									class="fa fa-instagram"></i></a>
 							</div>
 			<div class="header__top__right_register">
-								<a  th:href="@{/loginForm}"  th:if="${#ctx.session.isEmpty()}" ><i class="fa fa-user"></i> Login</a>
+								<a  th:href="@{/loginForm}"  th:if="${session.userInfo ==null }" ><i class="fa fa-user"></i> Login</a>
 								 <a style="margin-left:10px;" th:href="@{/registrationForm}"><i class="fa fa-user"></i>
 									Register</a>
 							</div>
-							<a onclick="logoutWarning()" th:unless="${#ctx.session.isEmpty()}" th:href="@{/logout}"><i class="fa fa-user"></i> LogOut</a>
+							<a onclick="logoutWarning()" th:if="${session.userInfo !=null }" th:href="@{/logout}"><i class="fa fa-user"></i> LogOut</a>
 						</div>
 					</div>
 				</div>

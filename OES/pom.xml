@@ -73,6 +73,16 @@
  			 <artifactId>razorpay-java</artifactId>
  		     <version>1.4.3</version>
 		</dependency>
+		
+		<dependency>
+             <groupId>jakarta.mail</groupId>
+   			 <artifactId>jakarta.mail-api</artifactId>
+			</dependency>
+	
+		<dependency>
+   			 <groupId>org.eclipse.angus</groupId>
+    		<artifactId>jakarta.mail</artifactId>
+		</dependency>
 
 
 

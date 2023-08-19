@@ -55,4 +55,14 @@ public class UserServicesImpl implements UserServices {
 		userRepository.saveAll(user);
 	}
 
+	@Override
+	public User registerUser(User user) {
+		return userRepository.save(user);
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		return userRepository.getUserByUserName(email);
+	}
+
 }

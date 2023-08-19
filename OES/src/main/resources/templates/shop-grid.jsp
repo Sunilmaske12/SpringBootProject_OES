@@ -148,7 +148,7 @@
 	<br>
 	<br>
 
-<footer  th:replace="/UserHeaderFooter/footer::userFooter"></footer>
+<footer  th:replace="~{/UserHeaderFooter/footer::userFooter}"></footer>
 
 	<!-- Js Plugins -->
 	<script src="js/jquery-3.3.1.min.js"></script>

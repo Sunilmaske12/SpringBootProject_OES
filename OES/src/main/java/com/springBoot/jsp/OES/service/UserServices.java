@@ -20,4 +20,9 @@ public interface UserServices {
 
 	public void seenAllUsers();
 
+	public User registerUser(User user);
+
+	public User getUserByEmail(String email);
+
+	
 }
