@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -41,24 +41,26 @@
 							</h2>
 						</div>
 						<div class="pt-3 pb-3">
-							<form class="form-horizontal" action="newPassword" method="POST">
+							<form class="form-horizontal"  th:action="@{/setNewPassword}" method="POST">
 								<!-- User Name Input -->
 								<div class="form-group row justify-content-center px-3">
 									<div class="col-9 px-0">
 										<input type="password" name="password" placeholder="&#xf084; &nbsp; New Password"
-											class="form-control border-info placeicon">
+											 class="form-control border-info placeicon">
 									</div>
 								</div>
 								<!-- Password Input -->
 								<div class="form-group row justify-content-center px-3">
 									<div class="col-9 px-0">
 										<input type="password" name="confPassword"
-											placeholder="&#xf084; &nbsp; Confirm New Password"
+											 placeholder="&#xf084; &nbsp; Confirm New Password"
 											class="form-control border-info placeicon">
 									</div>
 								</div>
-							
-								<!-- Log in Button -->
+								<div class="text-center">
+									<h6 style="color:red" th:text="${session.passError }"></h6>
+								</div>
+									<!-- Log in Button -->
 								<div class="form-group row justify-content-center">
 									<div class="col-3 px-3 mt-3">
 										<input type="submit" value="Reset"
@@ -78,7 +80,7 @@
 							<div class="pt-2">
 								<div class="row justify-content-center">
 									<h5>
-										Don't have an Account?<span><a href="RegistrationForm.jsp"
+										Don't have an Account?<span><a th:href="@{/registrationForm}"
 											class="text-danger"> Register Now!</a></span>
 									</h5>
 								</div>
@@ -95,8 +97,9 @@
 			</div>
 		</div>
 	</div>
-	<script type='text/javascript'
-		src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>
+	
+		<script type="text/javascript" src="js/Validation.js"></script>
+	<script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js'></script>
 	
 </body>
 </html>

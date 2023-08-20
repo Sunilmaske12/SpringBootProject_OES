@@ -39,7 +39,7 @@
 						<div class="signup-form">
 							<h2 class="form-title">REGISTER</h2>
 
-							<form th:action="@{/registerUser}" th:object="${User}" method="post" onsubmit="return validRegister()"  class="register-form"
+							<form th:action="@{/registerUser}" th:object="${User}" method="post" onsubmit="return validRegister()"   class="register-form"
 								id="register-form" >
 								
 								<!-- changes current -->

@@ -41,7 +41,6 @@
 <body data-col="2-columns" class=" 2-columns ">
 
 	<div class="wrapper nav-collapsed menu-collapsed">
-	<%  NotificationDao.seenUser(); %>
 		
 	<aside th:replace="~{/UserHeaderFooter/Asidebar::Asidebar}"></aside>
 		<nav th:replace="~{/UserHeaderFooter/Navbar::Navbar}"></nav>
@@ -75,8 +74,8 @@
 														<th>Action</th>
                                                      </tr>
 												</thead>
-              	<tr th:each="userList,status:${userList }">
-									            	<td th:text="${status.index+1 }"></td>
+              										<tr th:each="userList,status:${userList }">
+									            	<td><span  th:text="${status.index+1 }"></span><span th:if="${userList.seen=='No'}" style="color:red;"> (New)</span></td>
 													<td th:text="${userList.user_name }"></td>
 													<td th:text="${userList.user_mobno }"></td>
 													<td th:text="${userList.user_adderess }"></td>

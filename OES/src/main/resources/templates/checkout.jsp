@@ -78,9 +78,12 @@
 					</h6>
 				</div>
 			</div>
+			
 			<div class="checkout__form">
 				<h4>Billing Details</h4>
-				<form method="post" th:action="@{'/User/makeOrder'+','+${totalAmount }+','+${cartLength}}" id="orderPlaceAlert">
+				<form method="post" th:action="@{'/User/makeOrder'+','+${totalAmount }+','+${cartLength}}" id="orderPlaceAlert"
+				onsubmit="return validateAddress()" name="checkout"
+				>
 					<div class="row">
 						<div class=" col-md-6">
 
@@ -181,9 +184,9 @@
 	<script src="js/main.js"></script>
 	<script type="text/javascript"
 		src="https://checkout.razorpay.com/v1/checkout.js"></script>
-	<script type="text/javascript" src="js/Payment.js"></script>
 	<script type="text/javascript" src="js/CommonScript.js"></script>
 	<script type="text/javascript" src="js/Payment.js"></script>
+	<script type="text/javascript" src="js/Validation.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 

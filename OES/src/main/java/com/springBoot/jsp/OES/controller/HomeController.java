@@ -33,6 +33,8 @@ import com.springBoot.jsp.OES.service.OrderServices;
 import com.springBoot.jsp.OES.service.ProductService;
 import com.springBoot.jsp.OES.service.UserServices;
 
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class HomeController {
@@ -54,6 +56,9 @@ public class HomeController {
 	
 	@Autowired
 	private DailyBusinessServices dailyBusinessServices;
+	
+	@Autowired
+	private HttpSession httpSession;
 	
 	@ModelAttribute
 	public void commonData(Model model, @AuthenticationPrincipal CustomUserDetails userDetail)
@@ -88,13 +93,10 @@ public class HomeController {
 		model.addAttribute("allBanner", allBanner);
 		model.addAttribute("user", userDetail); 
 		model.addAttribute("recentProducts", recentProducts);
+		// String httpSession.setAttribute("loginSuccess");
+		model.addAttribute("loginSuccess", (String)httpSession.getAttribute("loginSuccess"));
+		httpSession.removeAttribute("loginSuccess");
 		return "index";
-	}
-
-	@GetMapping("/loginForm")
-	public String getLoginPage(Model model) {
-		// DailyBusiness dailyOnline
-		return "loginform";
 	}
 	
 	 @PostMapping("/Admin/updateAdmin")
@@ -154,12 +156,6 @@ public class HomeController {
 		return "redirect:/Admin/addProduct";
 	}
 	
-
-	@GetMapping("/Admin/calender")
-	public String getCalenderPage(Model model) {
-		
-		return "calender";
-	}
 
 	
 	@GetMapping("/Admin/adminPannel")

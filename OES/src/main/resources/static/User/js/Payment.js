@@ -21,12 +21,11 @@ function onlinePayment(payment){
 	console.log("working started");
 	let orderId=$("#orderId").val();
 	let amount1=$("#totalPricePay").val();
-	console.log("==============");
 	console.log(amount1);
 	console.log(orderId);
 	let options={
 		key:"rzp_test_7TxMC9UB8XmbM0",
-		amount:"900",
+		amount:amount1*100,
 		currency:"INR",
 		name:"ONLINE ELECTRICAL SHOPEE",
 		description:"Payment",

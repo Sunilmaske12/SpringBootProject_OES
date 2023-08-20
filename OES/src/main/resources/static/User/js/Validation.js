@@ -176,3 +176,15 @@ function validAddress(){
 
 });
 
+	function validateAddress(){
+		flag = true; 
+		var aid = document.checkout.address_id.value;
+		if(aid=='' || aid==null){
+			swal("Oops!", "Please select address!", "error")
+			flag = false;
+		}
+			return flag;
+		}
+		
+			
+			

@@ -23,6 +23,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" ></script>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
 <!-- Css Styles -->
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -37,13 +39,18 @@
 
 
 
-<body> <!-- <%if(orderSuccess!=null){%>
-  onload="orderPlacePopUp()"
-<%session4.removeAttribute("orderSuccess"); } %> --> 
+<body > 
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
+	
+	<div th:if="${orderStatus!=null }">
+    <script>
+    swal("Good job!", "Your order has been placed!", "success")
+
+    </script></div>
+	
 	<header th:replace="~{/UserHeaderFooter/header::userHeader}"></header>
 	
 
@@ -127,6 +134,7 @@
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript" src="js/CommonScript.js"></script>
+	<script type="text/javascript" src="js/Payment.js"></script>
 
 </body>
 

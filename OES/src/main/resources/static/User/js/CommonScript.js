@@ -366,7 +366,9 @@ function updateLike(){
 
 //===================Error & Success Popup================
 function orderPlacePopUp(){
+	alert("done")
 	swal("Good job!", "Your Order Place Succesfully!", "success");
+	return true;
 	}
 
 function addressrErrorPopUp(){

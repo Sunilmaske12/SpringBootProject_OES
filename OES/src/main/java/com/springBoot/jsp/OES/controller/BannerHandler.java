@@ -145,8 +145,5 @@ public class BannerHandler {
 			bannerServices.saveBanner(banner);
 			
 				return "redirect:bannerDetails,"+banner.getBanner_no();
-	}
-	
-	
+	}	
 }
-//sunil

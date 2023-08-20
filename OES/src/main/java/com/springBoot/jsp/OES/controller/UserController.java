@@ -54,7 +54,7 @@ public class UserController {
 	private HttpSession httpSession;
 	
 	@ModelAttribute
-	public void commonData(Model model, @AuthenticationPrincipal CustomUserDetails userDetail, HttpSession session)
+	public void commonData(Model model, @AuthenticationPrincipal CustomUserDetails userDetail)
 	{
 		if(userDetail !=null) {
 			User adminInfo = userServices.getUserById(userDetail.getId());
@@ -72,7 +72,6 @@ public class UserController {
 			model.addAttribute("newUsers", newUsers);
 			model.addAttribute("newOrders", newOrders);
 			model.addAttribute("newQuery", newQuery);
-			session.setAttribute("userInfo", adminInfo);
 			model.addAttribute("notificationCount", notificationCount);
 		}
 		
@@ -96,13 +95,17 @@ public class UserController {
 			  gmailSenderService.sendMail(myUser.getUser_emailid(), "sunilmaske2001@gmail.com",myUser.getUser_name()
 					  , message);
 		  }
-	  return  "loginform";
+	  return  "redirect:/customLogin";
 	  }
 	  
 	  @GetMapping("/customLogin")
-	  public String getCustomLoginForm() {
-		  return "loginform";
+	  public String getCustomLoginForm(Model model) {
+		  httpSession.setAttribute("loginSuccess", "success");
+			model.addAttribute("passUpdate", (String)httpSession.getAttribute("passUpdate"));
+			httpSession.removeAttribute("passUpdate");
+			  return "loginform";
 	  }
+	  
 	  
 	  @PostMapping("/User/editUser")
 	  public String updateUser(@ModelAttribute("userInfo") User user)
@@ -155,11 +158,11 @@ public class UserController {
 	}
 	
 	@PostMapping("/forgetPassword")
-	public String forgetPassword() {
+	public String forgetPassword(Model model) {
 		String email = request.getParameter("email");
 		User user = userServices.getUserByEmail(email);
 		if(user==null) {
-			httpSession.setAttribute("errorMessage", "This is not a registered email");
+			model.addAttribute("errorMessage", "Please enter registered email");
 			return "forgotPassword";
 		}
 		else {
@@ -168,22 +171,63 @@ public class UserController {
 			httpSession.setAttribute("otpValue", String.valueOf(otpValue));
 			String text = "Your otp is " +otpValue;
 			gmailSenderService.sendMail(email, "sunilmaske2001@gmail.com", "OES-OTP", text);
-			return "EnterOtp";
+			
+			httpSession.setAttribute("useridtosetPass", String.valueOf(user.getId()));
+			httpSession.removeAttribute("errorMessage");
+			return "redirect:/enterOtpPage";
 		}
 		
 	}
 	
+	@GetMapping("/enterOtpPage")
+	public String enterotpPage() {
+		return "EnterOtp";
+	}
+	
 	@PostMapping("/validateOtp")
-	public String validateOtp(){
+	public String validateOtp(Model model){
 		String userOtp = request.getParameter("otp");
 		String realOtp = (String)httpSession.getAttribute("otpValue");
 		if(!userOtp.equals(realOtp)) {
-			return "EnterOtp";
+		if(userOtp != null ) 	httpSession.setAttribute("errorMessage", "OTP not match");
+			return "redirect:/enterOtpPage";
 		}
 		else {
 			httpSession.removeAttribute("otpValue");
-			return "newPassword";
+					return "redirect:/newPasswordPage";
 		}
 	}
-
+	
+	@GetMapping("/newPasswordPage")
+	public String newPasswordPage() {
+		return "newPassword";
+	}
+	
+	@PostMapping("/setNewPassword")
+	public String setNewPassword() {
+		String pass1 = request.getParameter("password");
+		String pass2 = request.getParameter("confPassword");
+		if(pass1 == null || pass1=="") {
+			httpSession.setAttribute("passError", "Please enter password!");
+			return "redirect:/newPasswordPage";
+		}else if(pass1.length()<8) {
+			httpSession.setAttribute("passError", "Please enter strong password!");
+			return "redirect:/newPasswordPage";
+		} else 	if(!pass1.equals(pass2)) {
+			httpSession.setAttribute("passError", "Enter password not match!");
+			return "redirect:/newPasswordPage";
+		}
+		
+		httpSession.removeAttribute("passError");
+		String userId = (String)httpSession.getAttribute("useridtosetPass");
+		if(userId!=null) {
+			User user=userServices.getUserById(Integer.parseInt(userId));
+			user.setUser_pass(passwordEncoder.encode(pass1));
+			userServices.saveUser(user);
+			httpSession.setAttribute("passUpdate", "Success");
+		}
+		return "redirect:/customLogin";
+	}
+	
+	
 }

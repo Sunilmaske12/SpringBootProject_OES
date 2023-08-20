@@ -92,25 +92,7 @@
 	</section>
 	<!-- Contact Section End -->
 
-	<!-- Map Begin -->
-	<div class="map">
-		<iframe
-			src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.0345711981!2d79.10155404996937!3d21.151022438901247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd4c0c9597151bb%3A0x8d2707eb85172ba1!2sAgresan%20Chowk%2C%20Gandhibagh%2C%20Nagpur%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1667230512548!5m2!1sen!2sin"
-			width="600" height="450" style="border: 0;"></iframe>
-
-		<div class="map-inside">
-			<i class="icon_pin"></i>
-			<div class="inside-widget">
-				<h4>Maharashtra</h4>
-				<ul>
-					<li>Phone: +12-345-6789</li>
-					<li>Add: Agresan Chowk Nagpur</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- Map End -->
-
+	
 	
 
 	<section class="checkout spad">
@@ -176,6 +158,24 @@
 		</div>
 	</div>
 	<!-- Contact Form End -->
+<!-- Map Begin -->
+	<div class="map">
+		<iframe
+			src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.0345711981!2d79.10155404996937!3d21.151022438901247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd4c0c9597151bb%3A0x8d2707eb85172ba1!2sAgresan%20Chowk%2C%20Gandhibagh%2C%20Nagpur%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1667230512548!5m2!1sen!2sin"
+			width="600" height="450" style="border: 0;"></iframe>
+
+		<div class="map-inside">
+			<i class="icon_pin"></i>
+			<div class="inside-widget">
+				<h4>Maharashtra</h4>
+				<ul>
+					<li>Phone: +12-345-6789</li>
+					<li>Add: Agresan Chowk Nagpur</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- Map End -->
 
 		<footer th:replace="~{/UserHeaderFooter/footer::userFooter}"></footer>
 

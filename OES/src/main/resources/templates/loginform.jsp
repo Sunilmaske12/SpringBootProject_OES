@@ -38,6 +38,13 @@
 </head>
 <body>
 
+<div th:if="${passUpdate!=null }">
+    <script>
+    swal("Good job!", "Password Updated Successfully!", "success")
+
+    </script></div>
+	
+
 	<div class="main">
 		<!-- Sing in  Form -->
 		<section class="sign-in">

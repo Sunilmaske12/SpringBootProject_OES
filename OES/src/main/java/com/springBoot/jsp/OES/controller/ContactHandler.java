@@ -85,6 +85,7 @@ public class ContactHandler {
 		ChatTicket ct=new ChatTicket();
 			ct.setUser_Id(userDetail.getId());
 			ct.setUser_Name(userDetail.getName());
+			ct.setStatus("Waiting");
 			int tid =contactServices.saveTicket(ct);
 			
 		Chat chat=new Chat();
@@ -93,7 +94,7 @@ public class ContactHandler {
 			chat.setChat(msg);
 			chat.setSender(userDetail.getName());
 			contactServices.saveChats(chat);
-		return "redirect:/User/contact";
+		return "redirect:/User/allMyChats,"+ct.getTicketId()+",Waiting";
 	}
 	
 	@PostMapping("/User/sendChat")
@@ -108,6 +109,8 @@ public class ContactHandler {
 		return "redirect:/User/allMyChats,"+cid+",status";
 		
 	}
+	
+	// ====================Admin part===========================
 	
 	@PostMapping("/Admin/sendChat")
 	public String sendChatsToUser(@AuthenticationPrincipal CustomUserDetails user, Model model) {

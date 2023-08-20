@@ -100,13 +100,5 @@ public class ProductHandler {
 			//case "EDIT":  userServices.editUserById();
 		}
 		return "redirect:/viewProduct";
-	}
-
-	
-	public String addNewProduct(Model model) {
-		return "Add-product";
-	}
-	
-	
-	
+	}	
 }

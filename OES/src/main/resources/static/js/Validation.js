@@ -1,4 +1,5 @@
 //=================Registration validation start===============
+
 function validRegister(){
 	flag=false;
 		var name=$("#name").val();

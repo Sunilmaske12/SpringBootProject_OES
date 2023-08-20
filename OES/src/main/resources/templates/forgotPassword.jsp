@@ -43,8 +43,6 @@
 				</div>
 				<div class="signin-content">
 				<div  class="signin-form">
-					<%@include file="message.jsp"%>
-
 						<form method="post" th:action="@{/forgetPassword}" class="register-form"
 							id="login-form">
 							<div style="padding: 10px; font-size: 50px;">
@@ -56,32 +54,15 @@
 									 <input type="text"	name="email" id="email-for-pass"  placeholder="Email" required/>
 							</div>
 
-
-							<%
-							String errorMessage = (String) request.getAttribute("errorMessage");
-							if (errorMessage != null && !errorMessage.isEmpty()) {
-							%>
-							<p style="color: red;">
-								<%=request.getAttribute("errorMessage")%>
-							</p>
-							<%
-							}
-							%>
-
-
-
+						<p th:text="${errorMessage}" style="color: red;"></p>
+							
 							<div class="form-group form-button">
 								<button class="btn btn-success" type="submit">Get New
 									Password</button>
 								<a th:href="@{/customLogin}" class="btn btn-danger">Back to Login</a>
-
 							</div>
-
 						</form>
-
-
 					</div>
-
 					<div class="signup-image">
 
 						<figure>
@@ -93,8 +74,6 @@
 			</div>
 		</section>
 	</div>
-
-
 	<!-- JS -->
 	<script src="vendor/jquery/jquery.min.js"></script>
 	<script src="js/main.js"></script>

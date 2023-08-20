@@ -30,27 +30,15 @@
 
 </head>
 
-<body<!--  <%if(incompleteinfo!=null){
-	if(incompleteinfo.equals("No address")){
-		%>
-		  onload="addressrErrorPopUp()"
-		<%session4.removeAttribute("incompleteinfo"); }
-	else{
-	%>
-  onload="msgErrorPopUp()"
-<%session4.removeAttribute("incompleteinfo"); }}
- %> -->
-
->
-
+<body>
 	<!-- Page Preloder -->
 		<!-- Checkout Section Begin -->
-	<section class="checkout spad">
+	<section style="padding:30px" class="checkout spad">
 		<div class="container">
 		
 			<div class="checkout__form">
 				<h4 style="text-align:center;">Billing Details</h4>
-				<form method="post" th:action="@{/User/orderPlace}" id="orderPlaceAlert">
+				<form method="post" th:action="@{/User/orderPlace}" id="orderPlaceAlert" onsubmit=" return check()">
 					<div class="row">
 						
 						<!-- -Order Form Started -->

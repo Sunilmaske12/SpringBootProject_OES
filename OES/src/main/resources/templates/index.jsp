@@ -24,6 +24,9 @@
 	
 	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+ <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
 <!-- Css Styles -->
 <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
@@ -46,6 +49,11 @@
 	
 	<div th:replace="~{/CommonModal::myProfile}"></div>
 	
+	<div th:if="${loginSuccess=='success' }">
+    <script>
+        swal("You are successfully Login!")
+
+    </script></div>
 	
 	<!--  for product and category  -->
 	

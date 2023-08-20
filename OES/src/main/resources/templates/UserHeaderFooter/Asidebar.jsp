@@ -39,7 +39,7 @@
 							<li><a th:href="@{/Admin/allBanner}" class="menu-item">
 									BANNER </a></li>
 							
-							<li><a th:href="@{/loginForm}" class="menu-item">LOGIN FORM</a>
+							<li><a th:href="@{/customLogin}" class="menu-item">LOGIN FORM</a>
 							</li>
 
 							<li><a th:href="@{/registrationForm}" class="menu-item">REGISTRATION
@@ -67,7 +67,7 @@
 					<li class=" nav-item"><a th:href="@{/Admin/userList}"><i class="ft-book"></i><span data-i18n="" class="menu-title">USERS</span></a>
 					</li>
 
-					<li class=" nav-item"><a th:href="@{/Admin/calendar}"><i
+					<li class=" nav-item"><a><i
 							class="ft-calendar"></i><span data-i18n="" class="menu-title">CALENDER</span></a>
 					</li>
 
