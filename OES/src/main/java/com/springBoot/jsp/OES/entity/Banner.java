@@ -22,7 +22,6 @@ public class Banner {
 	String Banner_image;
 	public Banner() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public int getBanner_no() {
 		return banner_no;

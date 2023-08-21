@@ -118,44 +118,6 @@ public class HomeController {
 		productService.deleteCategoryById(cid);
 		return "redirect:/Admin/viewCategory";
 	}
-	
-	
-	
-
-	@GetMapping("/Admin/addProduct")
-	public String getAddProductPage(Model model) {
-		List<Category> allCat = productService.getAllCategories();
-			model.addAttribute("product", new Product());
-		model.addAttribute("categories", allCat);
-		return "Add-product";
-	}
-	
-	@PostMapping("/Admin/saveProduct")
-	public String saveProduct(Model model, @RequestParam("Image") MultipartFile file, @ModelAttribute Product product) {
-		
-		//setting image name
-		
-		if(file!=null) {
-			product.setProd_imageName(file.getOriginalFilename());
-		}
-		
-		//uploading image to folder
-		File saveFile;
-		try {
-		
-			saveFile = new ClassPathResource("static/img/product").getFile();
-				Path path = Paths.get(saveFile.getAbsolutePath()+File.separator+file.getOriginalFilename());
-				Files.copy(file.getInputStream(), path);
-	
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		productService.saveProduct(product);
-		
-		return "redirect:/Admin/addProduct";
-	}
-	
 
 	
 	@GetMapping("/Admin/adminPannel")

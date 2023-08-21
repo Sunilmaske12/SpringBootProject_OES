@@ -4,17 +4,17 @@
 	
 	
 </head>
-<body data-col="2-columns" class=" 2-columns " th:fragment="Navbar">
+<body data-col="2-columns" class=" 2-columns " th:fragment="Navbar" >
 
 	<span th:replace="~{/CommonModal::AdminProfile}"></span>
 	
 	
 	<!-- Navbar (Header) Starts-->
-	<nav class="navbar navbar-expand-lg navbar-light bg-faded"
+	<nav class="navbar navbar-expand-lg navbar-light bg-faded" style="background:linear-gradient(45deg, black, transparent); height:50px; margin-bottom:20px" 
 		th:object="${aminInfo}">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<h3 style="color: red;" class="font-weight-bold"
+				<h3 style="color: antiquewhite; font-style: italic;" class="font-weight-bold"
 					th:text="'Welcome : '+${aminInfo.user_name }"></h3>
 				<button type="button" data-toggle="collapse"
 					class="navbar-toggle d-lg-none float-left">

@@ -73,6 +73,11 @@
 											<!-- form start -->
 											<form class="form" th:action="@{/Admin/updateBanner}" th:object="${banner}" method="post"
 												enctype="multipart/form-data">
+												
+												<input type="hidden" name="banner_no" th:value="${banner.banner_no}">
+												<input type="hidden" name="action" th:value="${banner.action}">
+												<input type="hidden" name="Banner_image" th:value="${banner.Banner_image}">
+												
 												<div class="form-body">
 													<div class="form-group">
 														<label for="eventRegInput1">Banner Name </label> <input
