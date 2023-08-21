@@ -55,6 +55,12 @@
 	href="app-assets/vendors/css/chartist.min.css">
 <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
 
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+ <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css">
+
 <style>
 .dot {
   height: 15px;
@@ -72,7 +78,13 @@
 	
 	<aside th:replace="~{/UserHeaderFooter/Asidebar::Asidebar}"></aside>
 		<nav th:replace="~{/UserHeaderFooter/Navbar::Navbar}"></nav>
-
+	
+	<div th:if="${updateAdmin!=null }">
+    <script>
+    swal("Good job!", "Your Profile has been Updated!", "success")
+    </script></div>
+	
+	
 		<div class="main-panel">
 			<div class="main-content">
 				<div class="content-wrapper">

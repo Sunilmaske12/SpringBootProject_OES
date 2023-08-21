@@ -1,7 +1,9 @@
 package com.springBoot.jsp.OES.entity;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,15 +17,13 @@ public class Chat{
 	private int Chat_Id;
 	private String ticketid;
 	private String UserName;
-	@Column(insertable = false)
-	private Date Date;
-	@Column(insertable = false)
-	private Time Time;
+	private String Date =  LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+	private String Time =LocalTime.now().format(DateTimeFormatter.ofPattern("H:m a"));
 	private String Chats;
 	private String Admin_Manager;
 	private String Sender;
 	@Column(insertable = false)
-	private String Seen;
+	private String Seen="No";
 	
 	
 	
@@ -56,20 +56,13 @@ public class Chat{
 		UserName = userName;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return Date;
 	}
 
-	public void setDate(Date date) {
-		Date = date;
-	}
 
-	public Time getTime() {
+	public String getTime() {
 		return Time;
-	}
-
-	public void setTime(Time time) {
-		Time = time;
 	}
 
 	public String getChats() {

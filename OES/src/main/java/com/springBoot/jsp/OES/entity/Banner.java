@@ -1,6 +1,9 @@
 package com.springBoot.jsp.OES.entity;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,8 +18,8 @@ public class Banner {
 	@Column(name="B_Id")
 	int banner_no;
 	@Column(name="B_Name")
-		String banner_name;
-	String Date;
+	String banner_name;
+	String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 	@Column(name="Status")
 	String action;
 	String Banner_image;
@@ -36,10 +39,7 @@ public class Banner {
 		this.banner_name = banner_name;
 	}
 	public String getDate() {
-		return Date;
-	}
-	public void setDate(String date) {
-		Date = date;
+		return date;
 	}
 	public String getAction() {
 		return action;
@@ -55,7 +55,7 @@ public class Banner {
 	}
 	@Override
 	public String toString() {
-		return "Banner [banner_no=" + banner_no + ", banner_name=" + banner_name + ", Date=" + Date + ", action="
+		return "Banner [banner_no=" + banner_no + ", banner_name=" + banner_name + ", Date=" + date + ", action="
 				+ action + ", Banner_image=" + Banner_image + "]";
 	}
 	

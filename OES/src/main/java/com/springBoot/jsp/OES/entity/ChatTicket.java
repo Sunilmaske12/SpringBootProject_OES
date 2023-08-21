@@ -1,6 +1,9 @@
 package com.springBoot.jsp.OES.entity;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,14 +19,11 @@ public class ChatTicket {
 	private int ticketId;
 	private int User_Id;
 	private String User_Name;
-	@Column(insertable = false)
-	private Date Date ;
-	@Column(insertable = false)
-	private String Time;
+	private String Date =  LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+	private String Time =LocalTime.now().format(DateTimeFormatter.ofPattern("H:m a"));
 	private String Status;
 	private String Admin_Manager;
-	@Column(insertable = false)
-	private String seen;
+	private String seen="No";
 	
 	
 	public int getTicketId() {
@@ -44,11 +44,8 @@ public class ChatTicket {
 	public void setUser_Name(String user_Name) {
 		User_Name = user_Name;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return Date;
-	}
-	public void setDate(Date date) {
-		Date = date;
 	}
 	public String getTime() {
 		return Time;

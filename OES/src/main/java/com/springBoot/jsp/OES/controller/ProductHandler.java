@@ -126,10 +126,7 @@ public class ProductHandler {
 
 	@PostMapping("/Admin/saveProduct")
 	public String saveProduct(Model model, @RequestParam("Image") MultipartFile file, @ModelAttribute Product product) {
-
-		System.out.println(product);
-
-		if (file == null) {
+	if (file == null) {
 			return "redirect:/Admin/addProduct";
 
 		} else {

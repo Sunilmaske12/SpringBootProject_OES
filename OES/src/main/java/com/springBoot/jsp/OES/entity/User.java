@@ -21,6 +21,10 @@ public class User {
       private String user_pass;
 	  private String  user_type="ROLE_USER";
 	  private String seen="No";
+	  
+	public User() {
+		super();
+	}
 	public int getId() {
 		return id;
 	}

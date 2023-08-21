@@ -61,9 +61,12 @@
 							</div>
 							<div th:unless="${chats.UserName != Null}"  class="d-flex justify-content-end mb-4">
 								<div class="msg_cotainer_send">
+								
 									<span  th:text="${chats.Chats}"></span>
+									
 									<span  class="msg_time_send" th:text="${chats.Time }+'||'+${chats.Date }"> </span>
 								</div>
+								
 								<div class="img_cont_msg">
 								<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img_msg">
 								</div>

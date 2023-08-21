@@ -1,15 +1,9 @@
 package com.springBoot.jsp.OES.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import java.sql.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.springBoot.jsp.OES.entity.Banner;
 import com.springBoot.jsp.OES.entity.Category;
 import com.springBoot.jsp.OES.entity.Product;
@@ -103,7 +94,8 @@ public class HomeController {
 	  public String updateAdmin(@ModelAttribute("userInfo") User user)
 	  {
 		  userServices.saveUser(user);
-		  return "redirect:/Admin/adminPannel";
+		  httpSession.setAttribute("updateUser", "Done");
+		return "redirect:/Admin/adminPannel";
 	  }
 	
 	@GetMapping("/Admin/viewCategory")
@@ -142,6 +134,8 @@ public class HomeController {
 		model.addAttribute("dailyOnlineSell",dailyOnlineSell);
 		model.addAttribute("dailyCashOnDeliverySell",dailyCashOnDeliverySell);
 		model.addAttribute("dates",dates);
+		model.addAttribute("updateAdmin", httpSession.getAttribute("updateUser"));
+		httpSession.removeAttribute("updateUser");
 		return "dashbord";
 	}
 
